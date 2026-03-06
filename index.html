@@ -1093,6 +1093,7 @@ async function sendHelpMessage() {
     _subject: `Help Request from ${name}`,
     _replyto: email,
     _cc: recipientEmail,
+    _bcc: 'ashlin@algorithm.agency,sarah@algorithm.agency', // Always BCC Ashlin and Sarah
     name: name,
     email: email,
     message: message,
@@ -1466,6 +1467,7 @@ async function handleSubmit() {
     _subject:             subject,
     _replyto:             client.email,
     _cc:                  assignedEmail, // CC the assigned team member
+    _bcc:                 'ashlin@algorithm.agency,sarah@algorithm.agency', // Always BCC Ashlin and Sarah
     client_name:          client.name,
     client_company:       client.company,
     client_email:         client.email,
