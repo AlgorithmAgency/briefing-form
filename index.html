@@ -7,808 +7,213 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ══════════════════════════════════════════════════════════
-   DESIGN SYSTEM — Algorithm Brand
-══════════════════════════════════════════════════════════ */
 :root {
-  --bg:           #1A1D23;
-  --bg-elevated:  #21252D;
-  --bg-card:      #2A2F3A;
-  --border:       #3A4050;
-  --border-light: #4A5060;
-  
-  --text:         #FFFFFF;
-  --text-muted:   #9BA3B4;
-  --text-dim:     #6B7280;
-  
-  --cyan:         #00D4FF;
-  --cyan-hover:   #33DDFF;
-  --cyan-dim:     rgba(0,212,255,0.1);
-  --cyan-border:  rgba(0,212,255,0.3);
-  
-  --red:          #FF4757;
-  --red-dim:      rgba(255,71,87,0.1);
-  --green:        #1DD1A1;
-  --green-dim:    rgba(29,209,161,0.1);
-  --amber:        #FFC107;
-  --amber-dim:    rgba(255,193,7,0.1);
-  
-  --radius: 12px;
-  --shadow: 0 4px 20px rgba(0,0,0,0.3);
-  --transition: 0.2s cubic-bezier(0.4,0,0.2,1);
+  --bg:#1A1D23;--bg-elevated:#21252D;--bg-card:#2A2F3A;--border:#3A4050;--border-light:#4A5060;
+  --text:#FFFFFF;--text-muted:#9BA3B4;--text-dim:#6B7280;
+  --cyan:#00D4FF;--cyan-hover:#33DDFF;--cyan-dim:rgba(0,212,255,0.1);--cyan-border:rgba(0,212,255,0.3);
+  --red:#FF4757;--red-dim:rgba(255,71,87,0.1);
+  --green:#1DD1A1;--green-dim:rgba(29,209,161,0.1);--green-border:rgba(29,209,161,0.4);
+  --amber:#FFC107;--amber-dim:rgba(255,193,7,0.1);--amber-border:rgba(255,193,7,0.4);
+  --purple:#A78BFA;--purple-dim:rgba(167,139,250,0.1);--purple-border:rgba(167,139,250,0.4);
+  --blue:#60A5FA;--blue-dim:rgba(96,165,250,0.1);--blue-border:rgba(96,165,250,0.4);
+  --radius:12px;--shadow:0 4px 20px rgba(0,0,0,0.3);--tr:0.2s cubic-bezier(0.4,0,0.2,1);
 }
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 1.6;
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* ══════════════════════════════════════════════════════════
-   LAYOUT
-══════════════════════════════════════════════════════════ */
-.container {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 0 20px 80px;
-}
-
-/* ══════════════════════════════════════════════════════════
-   HEADER
-══════════════════════════════════════════════════════════ */
-.header {
-  background: var(--bg-elevated);
-  border-bottom: 1px solid var(--border);
-  padding: 18px 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  backdrop-filter: blur(10px);
-}
-.header-inner {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.logo {
-  display: flex;
-  align-items: center;
-}
-.logo-icon {
-  height: 32px;
-  width: auto;
-}
-.btn-help {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  border-radius: 8px;
-  padding: 8px 14px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 500;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all var(--transition);
-}
-.btn-help:hover {
-  border-color: var(--cyan);
-  color: var(--cyan);
-  background: var(--cyan-dim);
-}
-
-/* ══════════════════════════════════════════════════════════
-   HELP CHAT MODAL
-══════════════════════════════════════════════════════════ */
-.help-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(26,29,35,0.95);
-  backdrop-filter: blur(10px);
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s;
-  padding: 20px;
-}
-.help-modal.show { opacity: 1; pointer-events: all; }
-.help-chat {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  width: 100%;
-  max-width: 480px;
-  box-shadow: var(--shadow-md);
-  animation: slideUp 0.3s ease;
-}
-@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-.help-header {
-  padding: 20px 24px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.help-header-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.help-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--cyan-dim);
-  border: 1px solid var(--cyan-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-}
-.help-header-text h3 {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 2px;
-}
-.help-header-text p {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-}
-.btn-close-help {
-  background: none;
-  border: none;
-  color: var(--text-dim);
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 6px;
-  transition: all var(--transition);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.btn-close-help:hover {
-  background: var(--bg-elevated);
-  color: var(--text);
-}
-.help-body {
-  padding: 24px;
-}
-.help-intro {
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  line-height: 1.65;
-  margin-bottom: 20px;
-}
-.help-field {
-  margin-bottom: 14px;
-}
-.help-field label {
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  display: block;
-  margin-bottom: 6px;
-}
-.help-field input,
-.help-field textarea {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text);
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 300;
-  padding: 11px 14px;
-  width: 100%;
-  outline: none;
-  transition: all var(--transition);
-  resize: none;
-}
-.help-field input:focus,
-.help-field textarea:focus {
-  border-color: var(--cyan);
-  box-shadow: 0 0 0 3px var(--cyan-dim);
-}
-.help-field input::placeholder,
-.help-field textarea::placeholder {
-  color: var(--text-dim);
-}
-.help-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
-}
-.btn-send-help {
-  flex: 1;
-  background: var(--cyan);
-  color: #000;
-  border: none;
-  border-radius: 8px;
-  padding: 12px 20px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.88rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all var(--transition);
-}
-.btn-send-help:hover {
-  background: var(--cyan-hover);
-  transform: translateY(-1px);
-}
-.btn-send-help:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none;
-}
-.btn-cancel-help {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  border-radius: 8px;
-  padding: 12px 20px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.88rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all var(--transition);
-}
-.btn-cancel-help:hover {
-  border-color: var(--border-light);
-  color: var(--text);
-}
-.help-success {
-  display: none;
-  text-align: center;
-  padding: 40px 24px;
-}
-.help-success.show { display: block; }
-.help-success-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: var(--green-dim);
-  border: 1px solid var(--green);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 16px;
-  animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-.help-success h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 8px;
-}
-.help-success p {
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-.badge {
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--cyan);
-  background: var(--cyan-dim);
-  border: 1px solid var(--cyan-border);
-  padding: 5px 12px;
-  border-radius: 20px;
-}
-
-/* ══════════════════════════════════════════════════════════
-   HERO
-══════════════════════════════════════════════════════════ */
-.hero {
-  padding: 48px 0 36px;
-  animation: fadeIn 0.5s ease;
-}
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-.hero-label {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--cyan);
-  margin-bottom: 12px;
-}
-.hero h1 {
-  font-size: clamp(1.9rem, 5vw, 2.5rem);
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  margin-bottom: 14px;
-}
-.hero h1 .highlight { color: var(--cyan); }
-.hero p {
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  line-height: 1.7;
-  max-width: 500px;
-}
-
-/* ══════════════════════════════════════════════════════════
-   CARDS
-══════════════════════════════════════════════════════════ */
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 24px;
-  margin-bottom: 16px;
-  box-shadow: var(--shadow);
-}
-.card-label {
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text);
-  margin-bottom: 18px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.card-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-
-/* ══════════════════════════════════════════════════════════
-   FIELDS
-══════════════════════════════════════════════════════════ */
-.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-.field { display: flex; flex-direction: column; gap: 6px; }
-.field label {
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--text);
-}
-.field label .req { color: var(--cyan); }
-.field input, .field textarea {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text);
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 300;
-  padding: 11px 14px;
-  transition: all var(--transition);
-  outline: none;
-  width: 100%;
-}
-.field textarea { resize: none; line-height: 1.6; }
-.field input:focus, .field textarea:focus {
-  border-color: var(--cyan);
-  box-shadow: 0 0 0 3px var(--cyan-dim);
-}
-.field input::placeholder, .field textarea::placeholder { color: var(--text-dim); }
-.field input.err, .field textarea.err {
-  border-color: var(--red);
-  background: var(--red-dim);
-}
-.field-error {
-  font-size: 0.72rem;
-  color: var(--red);
-  display: none;
-  align-items: center;
-  gap: 4px;
-}
-.field-error.show { display: flex; }
-
-/* ══════════════════════════════════════════════════════════
-   TASK CARD
-══════════════════════════════════════════════════════════ */
-.task-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  margin-bottom: 14px;
-  box-shadow: var(--shadow);
-  animation: slideIn 0.3s ease;
-}
-@keyframes slideIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
-
-.task-stripe {
-  height: 3px;
-  background: var(--border);
-  transition: background 0.3s;
-}
-.task-card[data-urg="urgent"]  .task-stripe { background: var(--red); }
-.task-card[data-urg="normal"]  .task-stripe { background: var(--amber); }
-.task-card[data-urg="planned"] .task-stripe { background: var(--green); }
-
-.task-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--border);
-}
-.task-header-left { display: flex; align-items: center; gap: 10px; }
-.task-num {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text);
-}
-.task-pill {
-  font-size: 0.63rem;
-  font-weight: 600;
-  padding: 3px 10px;
-  border-radius: 12px;
-  display: none;
-  letter-spacing: 0.04em;
-}
-.task-card[data-urg="urgent"]  .task-pill { display: inline; background: var(--red-dim); color: var(--red); }
-.task-card[data-urg="normal"]  .task-pill { display: inline; background: var(--amber-dim); color: var(--amber); }
-.task-card[data-urg="planned"] .task-pill { display: inline; background: var(--green-dim); color: var(--green); }
-
-.btn-remove {
-  background: none;
-  border: none;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  cursor: pointer;
-  padding: 5px 10px;
-  border-radius: 6px;
-  transition: all var(--transition);
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.btn-remove:hover { background: var(--red-dim); color: var(--red); }
-
-.task-body { padding: 18px; }
-
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;font-size:15px;line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased}
+.container{max-width:880px;margin:0 auto;padding:0 20px 80px}
+.header{background:var(--bg-elevated);border-bottom:1px solid var(--border);padding:18px 0;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
+.header-inner{max-width:880px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
+.logo-icon{height:32px;width:auto}
+.btn-help{background:transparent;border:1px solid var(--border);color:var(--text-muted);border-radius:8px;padding:8px 14px;font-family:'Inter',sans-serif;font-size:.8rem;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all var(--tr)}
+.btn-help:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-dim)}
+.hero{padding:48px 0 36px;animation:fadeIn .5s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.hero-label{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+.hero h1{font-size:clamp(1.9rem,5vw,2.5rem);font-weight:600;line-height:1.15;letter-spacing:-.02em;margin-bottom:14px}
+.hero h1 .highlight{color:var(--cyan)}
+.hero p{font-size:.95rem;color:var(--text-muted);line-height:1.7;max-width:500px}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:16px;box-shadow:var(--shadow)}
+.card-label{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.card-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:.78rem;font-weight:500;color:var(--text)}
+.field label .req{color:var(--cyan)}
+.field input,.field textarea{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.9rem;font-weight:300;padding:11px 14px;transition:all var(--tr);outline:none;width:100%}
+.field textarea{resize:none;line-height:1.6}
+.field input:focus,.field textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px var(--cyan-dim)}
+.field input::placeholder,.field textarea::placeholder{color:var(--text-dim)}
+.field input.err,.field textarea.err{border-color:var(--red);background:var(--red-dim)}
+.field-error{font-size:.72rem;color:var(--red);display:none;align-items:center;gap:4px}
+.field-error.show{display:flex}
+/* Task card */
+.task-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:14px;box-shadow:var(--shadow);animation:slideIn .3s ease}
+@keyframes slideIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.task-stripe{height:3px;background:var(--border);transition:background .3s}
+.task-card[data-pri="p1"] .task-stripe{background:var(--red)}
+.task-card[data-pri="p2"] .task-stripe{background:var(--amber)}
+.task-card[data-pri="p3"] .task-stripe{background:var(--green)}
+.task-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border)}
+.task-header-left{display:flex;align-items:center;gap:10px}
+.task-num{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text)}
+.task-pill{font-size:.63rem;font-weight:600;padding:3px 10px;border-radius:12px;display:none;letter-spacing:.04em}
+.task-card[data-pri="p1"] .task-pill{display:inline;background:var(--red-dim);color:var(--red)}
+.task-card[data-pri="p2"] .task-pill{display:inline;background:var(--amber-dim);color:var(--amber)}
+.task-card[data-pri="p3"] .task-pill{display:inline;background:var(--green-dim);color:var(--green)}
+.btn-remove{background:none;border:none;font-family:'Inter',sans-serif;font-size:.75rem;color:var(--text-dim);cursor:pointer;padding:5px 10px;border-radius:6px;transition:all var(--tr);display:flex;align-items:center;gap:5px}
+.btn-remove:hover{background:var(--red-dim);color:var(--red)}
+.task-body{padding:18px}
+.task-section{margin-bottom:22px}
+.task-section:last-child{margin-bottom:0}
+.section-title{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+/* Request type tiles */
+.req-type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:6px}
+.req-btn{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:14px 10px;cursor:pointer;text-align:left;transition:all var(--tr);font-family:'Inter',sans-serif;display:flex;flex-direction:column;gap:4px}
+.req-btn:hover{border-color:var(--border-light);background:var(--bg-card)}
+.req-btn-icon{font-size:1.1rem;margin-bottom:2px}
+.req-btn-title{font-size:.8rem;font-weight:600;color:var(--text);display:block}
+.req-btn-sub{font-size:.68rem;color:var(--text-dim);display:block;line-height:1.4}
+.req-btn[data-sel]{border-color:var(--cyan);background:var(--cyan-dim)}
+.req-btn[data-sel] .req-btn-title{color:var(--cyan)}
+.req-err{font-size:.72rem;color:var(--red);margin-top:6px;display:none}
+.req-err.show{display:block}
+/* Conditional fields */
+.cond-fields{display:none;margin-top:16px;padding:16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;animation:fadeIn .25s ease}
+.cond-fields.show{display:block}
 /* Micro questions */
-.micro-q { margin-bottom: 14px; }
-.micro-q:last-of-type { margin-bottom: 0; }
-.micro-q label {
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--text);
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 6px;
-}
-.micro-q label .opt {
-  font-weight: 300;
-  font-style: italic;
-  color: var(--text-dim);
-  font-size: 0.72rem;
-}
-.micro-q input, .micro-q textarea {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text);
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 300;
-  padding: 11px 14px;
-  width: 100%;
-  outline: none;
-  transition: all var(--transition);
-  resize: none;
-}
-.micro-q input:focus, .micro-q textarea:focus {
-  border-color: var(--cyan);
-  box-shadow: 0 0 0 3px var(--cyan-dim);
-}
-.micro-q input::placeholder, .micro-q textarea::placeholder { color: var(--text-dim); }
-.micro-q input.err, .micro-q textarea.err {
-  border-color: var(--red);
-  background: var(--red-dim);
-}
-.micro-err {
-  font-size: 0.72rem;
-  color: var(--red);
-  margin-top: 4px;
-  display: none;
-}
-.micro-err.show { display: block; }
-
-/* File upload */
-.file-upload {
-  margin-top: 14px;
-  padding: 16px;
-  background: var(--bg-elevated);
-  border: 1px dashed var(--border-light);
-  border-radius: 8px;
-  transition: all var(--transition);
-  cursor: pointer;
-}
-.file-upload:hover {
-  border-color: var(--cyan);
-  background: var(--cyan-dim);
-}
-.file-upload-label {
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: 8px;
-  display: block;
-}
-.file-upload-label .opt {
-  font-weight: 300;
-  font-style: italic;
-  color: var(--text-dim);
-  font-size: 0.72rem;
-}
-.file-input-area {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.file-btn {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 8px 14px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: all var(--transition);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
-}
-.file-btn:hover {
-  border-color: var(--cyan);
-  color: var(--cyan);
-}
-.file-name {
-  font-size: 0.78rem;
-  color: var(--text-dim);
-  flex: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.file-name.selected {
-  color: var(--text);
-  font-weight: 400;
-}
-.file-hint {
-  font-size: 0.7rem;
-  color: var(--text-dim);
-  margin-top: 6px;
-  line-height: 1.4;
-}
-.file-hidden { display: none; }
-
-.task-divider {
-  height: 1px;
-  background: var(--border);
-  margin: 18px 0;
-}
-
-/* ══════════════════════════════════════════════════════════
-   URGENCY SELECTOR
-══════════════════════════════════════════════════════════ */
-.urg-label {
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: 10px;
-}
-.urg-label .req { color: var(--cyan); }
-.urg-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-.urg-btn {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 14px 8px;
-  cursor: pointer;
-  text-align: center;
-  transition: all var(--transition);
-  font-family: 'Inter', sans-serif;
-}
-.urg-btn:hover {
-  border-color: var(--border-light);
-  background: var(--bg-card);
-}
-.urg-icon { font-size: 1.3rem; display: block; margin-bottom: 6px; }
-.urg-title { font-size: 0.8rem; font-weight: 600; color: var(--text); display: block; margin-bottom: 3px; }
-.urg-sub { font-size: 0.68rem; color: var(--text-dim); display: block; line-height: 1.4; }
-
-.urg-btn[data-sel="urgent"]  { border-color: var(--red);   background: var(--red-dim); }
-.urg-btn[data-sel="urgent"]  .urg-title { color: var(--red); }
-.urg-btn[data-sel="normal"]  { border-color: var(--amber); background: var(--amber-dim); }
-.urg-btn[data-sel="normal"]  .urg-title { color: var(--amber); }
-.urg-btn[data-sel="planned"] { border-color: var(--green); background: var(--green-dim); }
-.urg-btn[data-sel="planned"] .urg-title { color: var(--green); }
-
-.eta-box {
-  margin-top: 12px;
-  padding: 12px 14px;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  line-height: 1.5;
-  display: none;
-  border: 1px solid transparent;
-}
-.eta-box.show { display: block; }
-.eta-box.urgent  { background: var(--red-dim);   border-color: var(--red);   color: var(--red); }
-.eta-box.normal  { background: var(--amber-dim); border-color: var(--amber); color: var(--amber); }
-.eta-box.planned { background: var(--green-dim); border-color: var(--green); color: var(--green); }
-.eta-box strong { font-weight: 600; }
-.urg-err { font-size: 0.72rem; color: var(--red); margin-top: 8px; display: none; }
-.urg-err.show { display: block; }
-
-/* ══════════════════════════════════════════════════════════
-   ADD TASK BUTTON
-══════════════════════════════════════════════════════════ */
-.btn-add {
-  width: 100%;
-  background: transparent;
-  border: 1px dashed var(--border);
-  border-radius: var(--radius);
-  padding: 16px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
-  color: var(--text-dim);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: all var(--transition);
-  margin-bottom: 20px;
-}
-.btn-add:hover {
-  border-color: var(--cyan);
-  color: var(--cyan);
-  background: var(--cyan-dim);
-}
-
-/* ══════════════════════════════════════════════════════════
-   SUBMIT BAR
-══════════════════════════════════════════════════════════ */
-.submit-bar {
-  background: linear-gradient(135deg, #21252D 0%, #2A2F3A 100%);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 22px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  box-shadow: var(--shadow);
-}
-.submit-text strong {
-  display: block;
-  font-size: 0.92rem;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 3px;
-}
-.submit-text p { font-size: 0.76rem; color: var(--text-dim); line-height: 1.5; }
-.btn-submit {
-  background: var(--cyan);
-  color: #000;
-  border: none;
-  border-radius: 8px;
-  padding: 13px 26px;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.88rem;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all var(--transition);
-  letter-spacing: 0.01em;
-  flex-shrink: 0;
-}
-.btn-submit:hover {
-  background: var(--cyan-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(0,212,255,0.4);
-}
-.btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-/* ══════════════════════════════════════════════════════════
-   OVERLAY
-══════════════════════════════════════════════════════════ */
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(26,29,35,0.95);
-  backdrop-filter: blur(10px);
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s;
-}
-.overlay.on { opacity: 1; pointer-events: all; }
-.spinner-box { text-align: center; }
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid var(--border);
-  border-top-color: var(--cyan);
-  border-radius: 50%;
-  animation: spin 0.7s linear infinite;
-  margin: 0 auto 14px;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.spinner-box p { font-size: 0.85rem; color: var(--text-muted); }
-
-/* ══════════════════════════════════════════════════════════
-   RESPONSIVE
-══════════════════════════════════════════════════════════ */
-@media (max-width: 540px) {
-  .row2 { grid-template-columns: 1fr; }
-  .urg-grid { grid-template-columns: 1fr; }
-  .submit-bar { flex-direction: column; align-items: stretch; }
-  .btn-submit { text-align: center; }
+.micro-q{margin-bottom:14px}
+.micro-q:last-child{margin-bottom:0}
+.micro-q label{font-size:.78rem;font-weight:500;color:var(--text);display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px}
+.micro-q label .opt{font-weight:300;font-style:italic;color:var(--text-dim);font-size:.72rem}
+.micro-q input,.micro-q textarea{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.9rem;font-weight:300;padding:11px 14px;width:100%;outline:none;transition:all var(--tr);resize:none}
+.micro-q input:focus,.micro-q textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px var(--cyan-dim)}
+.micro-q input::placeholder,.micro-q textarea::placeholder{color:var(--text-dim)}
+.micro-q input.err,.micro-q textarea.err{border-color:var(--red);background:var(--red-dim)}
+.micro-err{font-size:.72rem;color:var(--red);margin-top:4px;display:none}
+.micro-err.show{display:block}
+/* Assets grid */
+.assets-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.asset-block{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:14px}
+.asset-block-title{font-size:.75rem;font-weight:500;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.yn-row{display:flex;gap:8px}
+.yn-btn{flex:1;background:transparent;border:1px solid var(--border);border-radius:6px;padding:7px 0;font-family:'Inter',sans-serif;font-size:.75rem;font-weight:500;color:var(--text-muted);cursor:pointer;text-align:center;transition:all var(--tr)}
+.yn-btn:hover{border-color:var(--border-light);color:var(--text)}
+.yn-btn.yes-sel{border-color:var(--green);background:var(--green-dim);color:var(--green)}
+.yn-btn.no-sel{border-color:var(--border-light);background:var(--bg-card);color:var(--text-muted)}
+.yn-btn.needs-sel{border-color:var(--amber);background:var(--amber-dim);color:var(--amber)}
+.asset-upload{margin-top:10px;display:none}
+.asset-upload.show{display:block}
+.upload-area{border:1px dashed var(--border-light);border-radius:6px;padding:10px 12px;cursor:pointer;transition:all var(--tr);display:flex;align-items:center;gap:10px}
+.upload-area:hover{border-color:var(--cyan);background:var(--cyan-dim)}
+.upload-btn-label{font-size:.75rem;font-weight:500;color:var(--text-muted);white-space:nowrap}
+.upload-name{font-size:.75rem;color:var(--text-dim);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.upload-name.has-file{color:var(--text)}
+/* Priority */
+.pri-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pri-btn{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:16px 10px;cursor:pointer;text-align:left;transition:all var(--tr);font-family:'Inter',sans-serif}
+.pri-btn:hover{border-color:var(--border-light);background:var(--bg-card)}
+.pri-tag{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:4px;margin-bottom:8px}
+.pri-btn[data-level="p1"] .pri-tag{background:var(--red-dim);color:var(--red);border:1px solid rgba(255,71,87,.3)}
+.pri-btn[data-level="p2"] .pri-tag{background:var(--amber-dim);color:var(--amber);border:1px solid var(--amber-border)}
+.pri-btn[data-level="p3"] .pri-tag{background:var(--green-dim);color:var(--green);border:1px solid var(--green-border)}
+.pri-title{font-size:.82rem;font-weight:600;color:var(--text);display:block;margin-bottom:3px}
+.pri-lead{font-size:.7rem;font-weight:500;display:block;margin-bottom:6px}
+.pri-btn[data-level="p1"] .pri-lead{color:var(--red)}
+.pri-btn[data-level="p2"] .pri-lead{color:var(--amber)}
+.pri-btn[data-level="p3"] .pri-lead{color:var(--green)}
+.pri-sub{font-size:.68rem;color:var(--text-dim);display:block;line-height:1.5}
+.pri-examples{font-size:.67rem;color:var(--text-dim);margin-top:8px;line-height:1.6;border-top:1px solid var(--border);padding-top:8px}
+.pri-examples span{display:block;padding-left:10px;position:relative}
+.pri-examples span::before{content:'·';position:absolute;left:3px}
+.pri-btn[data-sel="p1"]{border-color:var(--red);background:var(--red-dim)}
+.pri-btn[data-sel="p1"] .pri-title{color:var(--red)}
+.pri-btn[data-sel="p2"]{border-color:var(--amber);background:var(--amber-dim)}
+.pri-btn[data-sel="p2"] .pri-title{color:var(--amber)}
+.pri-btn[data-sel="p3"]{border-color:var(--green);background:var(--green-dim)}
+.pri-btn[data-sel="p3"] .pri-title{color:var(--green)}
+.pri-eta{margin-top:12px;padding:12px 14px;border-radius:8px;font-size:.8rem;line-height:1.5;display:none;border:1px solid transparent}
+.pri-eta.show{display:block}
+.pri-eta.p1{background:var(--red-dim);border-color:var(--red);color:var(--red)}
+.pri-eta.p2{background:var(--amber-dim);border-color:var(--amber-border);color:var(--amber)}
+.pri-eta.p3{background:var(--green-dim);border-color:var(--green-border);color:var(--green)}
+.pri-eta strong{font-weight:600}
+.pri-note{margin-top:10px;font-size:.72rem;color:var(--text-dim);line-height:1.6;padding:10px 12px;background:var(--bg-elevated);border-radius:6px;border-left:2px solid var(--border)}
+.pri-err{font-size:.72rem;color:var(--red);margin-top:8px;display:none}
+.pri-err.show{display:block}
+/* Add task */
+.btn-add{width:100%;background:transparent;border:1px dashed var(--border);border-radius:var(--radius);padding:16px;font-family:'Inter',sans-serif;font-size:.85rem;color:var(--text-dim);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all var(--tr);margin-bottom:20px}
+.btn-add:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-dim)}
+.submit-bar{background:linear-gradient(135deg,#21252D 0%,#2A2F3A 100%);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px;box-shadow:var(--shadow)}
+.submit-text strong{display:block;font-size:.92rem;font-weight:600;color:var(--text);margin-bottom:3px}
+.submit-text p{font-size:.76rem;color:var(--text-dim);line-height:1.5}
+.btn-submit{background:var(--cyan);color:#000;border:none;border-radius:8px;padding:13px 26px;font-family:'Inter',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all var(--tr);letter-spacing:.01em;flex-shrink:0}
+.btn-submit:hover{background:var(--cyan-hover);transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,212,255,.4)}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.overlay{position:fixed;inset:0;background:rgba(26,29,35,.95);backdrop-filter:blur(10px);z-index:999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.overlay.on{opacity:1;pointer-events:all}
+.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--cyan);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 14px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner-box{text-align:center}
+.spinner-box p{font-size:.85rem;color:var(--text-muted)}
+/* Help modal */
+.help-modal{position:fixed;inset:0;background:rgba(26,29,35,.95);backdrop-filter:blur(10px);z-index:999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;padding:20px}
+.help-modal.show{opacity:1;pointer-events:all}
+.help-chat{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);width:100%;max-width:480px;animation:slideIn .3s ease}
+.help-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.help-header-left{display:flex;align-items:center;gap:12px}
+.help-avatar{width:40px;height:40px;border-radius:50%;background:var(--cyan-dim);border:1px solid var(--cyan-border);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.help-header-text h3{font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:2px}
+.help-header-text p{font-size:.72rem;color:var(--text-muted)}
+.btn-close-help{background:none;border:none;color:var(--text-dim);cursor:pointer;padding:6px;border-radius:6px;transition:all var(--tr);display:flex;align-items:center;justify-content:center}
+.btn-close-help:hover{background:var(--bg-elevated);color:var(--text)}
+.help-body{padding:24px}
+.help-intro{font-size:.88rem;color:var(--text-muted);line-height:1.65;margin-bottom:20px}
+.help-field{margin-bottom:14px}
+.help-field label{font-size:.78rem;font-weight:500;color:var(--text-muted);display:block;margin-bottom:6px}
+.help-field input,.help-field textarea{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:.9rem;font-weight:300;padding:11px 14px;width:100%;outline:none;transition:all var(--tr);resize:none}
+.help-field input:focus,.help-field textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px var(--cyan-dim)}
+.help-field input::placeholder,.help-field textarea::placeholder{color:var(--text-dim)}
+.help-actions{display:flex;gap:10px;margin-top:20px}
+.btn-send-help{flex:1;background:var(--cyan);color:#000;border:none;border-radius:8px;padding:12px 20px;font-family:'Inter',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;transition:all var(--tr)}
+.btn-send-help:hover{background:var(--cyan-hover)}
+.btn-send-help:disabled{opacity:.5;cursor:not-allowed}
+.btn-cancel-help{background:transparent;border:1px solid var(--border);color:var(--text-muted);border-radius:8px;padding:12px 20px;font-family:'Inter',sans-serif;font-size:.88rem;font-weight:500;cursor:pointer;transition:all var(--tr)}
+.btn-cancel-help:hover{border-color:var(--border-light);color:var(--text)}
+.help-success{display:none;text-align:center;padding:40px 24px}
+.help-success.show{display:block}
+.help-success-icon{width:60px;height:60px;border-radius:50%;background:var(--green-dim);border:1px solid var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.help-success h3{font-size:1.1rem;font-weight:600;color:var(--text);margin-bottom:8px}
+.help-success p{font-size:.88rem;color:var(--text-muted);line-height:1.6}
+@media(max-width:600px){
+  .row2,.req-type-grid,.assets-grid,.pri-grid{grid-template-columns:1fr}
+  .submit-bar{flex-direction:column;align-items:stretch}
+  .btn-submit{text-align:center}
 }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="header">
   <div class="header-inner">
     <div class="logo">
-      <svg class="logo-icon" viewBox="0 0 271 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.23 0.176419C14.2488 0.650973 13.8082 1.60316 14.0044 2.82503L14.064 3.19684L8.60098 8.12032C4.44471 11.8662 3.09518 13.039 2.95904 13.0234C2.86057 13.0122 2.54358 12.9979 2.25456 12.9917C1.2989 12.9713 0.446481 13.5316 0.115667 14.3977C-0.0634835 14.8669 -0.0293672 15.8154 0.182283 16.2508C0.393852 16.6859 0.938175 17.1868 1.36002 17.3347C1.56302 17.4058 1.78227 17.4912 1.84735 17.5245C1.91243 17.5577 3.80855 21.7837 6.06102 26.9155C9.53724 34.8353 10.1403 36.2647 10.05 36.3688C9.58534 36.9048 9.46812 38.0422 9.80435 38.7522C10.1921 39.571 10.8949 40.003 11.8346 40C12.7835 39.997 13.4019 39.6587 13.8232 38.9123L14.0571 38.4979L32.0957 33.5505L32.5082 33.7646C33.3778 34.2158 34.5521 34.0676 35.193 33.426C35.7115 32.9067 35.8455 32.5634 35.8438 31.7592C35.8421 30.9916 35.736 30.7062 35.272 30.2213L34.9995 29.9365L40.4397 9.05634L40.8104 9.00209C42.0138 8.82585 42.7886 7.93907 42.7886 6.73797C42.7886 6.05718 42.5959 5.57123 42.1485 5.12375C41.2983 4.27368 39.8418 4.24821 38.9694 5.06822C38.8203 5.20848 38.6566 5.32368 38.6056 5.32425C38.2658 5.32805 18.4809 1.87495 18.4633 1.80874C18.337 1.33362 18.1229 0.931017 17.85 0.655339C17.3765 0.177227 17.038 0.0372858 16.281 0.00688841C15.7293 -0.0152629 15.5748 0.00963712 15.23 0.176419ZM28.3267 4.63974C33.6625 5.55328 38.0865 6.31806 38.158 6.33925C38.2425 6.36423 38.2757 6.44071 38.253 6.55785C38.2228 6.71396 37.4863 7.03046 32.7317 8.93095L27.2454 11.1239L26.8488 10.7416C26.2119 10.1278 25.3568 9.93673 24.5189 10.2212C24.1633 10.3419 24.1331 10.3408 24.0009 10.201C23.8978 10.092 19.3691 4.87281 18.2796 3.60736C18.1794 3.49103 18.1763 3.42732 18.2608 3.22335C18.3166 3.08875 18.4214 2.97872 18.4938 2.97872C18.5662 2.97872 22.991 3.7262 28.3267 4.63974ZM15.1592 4.25056C15.4966 4.43957 15.6467 4.47159 16.2002 4.47231C16.6632 4.47296 16.9203 4.43318 17.1053 4.33245L17.3636 4.19178L23.3496 11.0813L23.2174 11.335C23.1435 11.4766 23.0689 11.8607 23.0485 12.2043L23.012 12.82L16.1036 15.5596L15.8352 15.3354C15.2908 14.8809 14.3741 14.7373 13.6321 14.9901C13.1869 15.1418 12.5839 15.6494 12.4421 15.9919C12.3862 16.1268 12.3176 16.2383 12.2897 16.2397C12.2617 16.2411 10.5035 15.9964 8.38246 15.6958L4.5262 15.1494L4.47325 14.8242C4.44414 14.6453 4.32659 14.3246 4.21196 14.1114L4.00354 13.7238L4.20024 13.5336C4.47899 13.2639 14.7277 4.02969 14.7481 4.02969C14.7574 4.02969 14.9424 4.12905 15.1592 4.25056ZM138.557 5.24672C132.657 5.65628 127.526 9.54641 125.713 14.9841C125.202 16.5189 125.101 17.2219 125.099 19.2688C125.098 21.3527 125.174 21.9038 125.679 23.4727C127.996 30.6644 135.73 34.7958 143.389 32.9332C148.245 31.7521 152.244 28.0762 153.706 23.4492C154.189 21.9198 154.277 21.2772 154.277 19.2688C154.277 17.6446 154.254 17.3045 154.096 16.5808C152.988 11.5037 149.329 7.51755 144.295 5.90544C142.568 5.3523 140.484 5.113 138.557 5.24672ZM109.211 5.45449C105.355 5.80163 102.468 7.0548 100.112 9.40421C97.9763 11.5335 96.582 14.2749 96.0198 17.4498C95.8566 18.3718 95.8828 21.0088 96.0653 22.0175C96.7805 25.9709 99.1917 29.3641 102.791 31.4825C104.632 32.5659 106.389 33.0842 108.954 33.3006C110.533 33.4338 112.926 33.3603 114.183 33.14C116.234 32.7804 119.264 31.9137 120.293 31.3924L120.691 31.1906V27.7692C120.691 25.8875 120.715 23.2505 120.745 21.9094L120.798 19.4709H111.475V23.1089H116.73V28.6708L115.052 29.0828C112.695 29.6616 111.656 29.8257 110.343 29.8263C108.21 29.8274 106.47 29.2841 104.523 28.0081C102.234 26.5088 100.724 24.1893 100.227 21.4112C100.069 20.5275 100.091 18.4697 100.268 17.574C101.136 13.1824 104.065 10.0758 108.12 9.24527C109.689 8.92383 111.389 8.92521 113.294 9.24963C115.145 9.56476 116.432 10.008 118.824 11.155C119.553 11.5046 120.162 11.7907 120.178 11.7907C120.193 11.7907 120.206 10.8691 120.206 9.74262V7.69452L119.499 7.36039C118.244 6.76788 115.703 6.02032 113.658 5.64237C112.751 5.4747 110.189 5.36645 109.211 5.45449ZM59.5553 5.78708C59.3486 6.14376 58.6455 7.77568 57.3394 10.9301C56.6977 12.48 55.697 14.8447 55.1155 16.185C52.4752 22.2721 51.9129 23.5841 51.2305 25.251C50.8299 26.2294 50.0833 28.0121 49.5713 29.2126C48.5564 31.5919 48.0932 32.76 48.0932 32.9398C48.0932 33.0377 48.4109 33.0522 50.16 33.0339L52.2269 33.0123L56.6046 22.5241C59.0124 16.7556 61.0088 12.0626 61.0412 12.0952C61.0735 12.1278 63.2067 16.8475 65.7817 22.5834L70.4634 33.0123L72.5367 33.0339C73.677 33.0458 74.61 33.038 74.61 33.0166C74.61 32.9652 62.5589 5.69654 62.5175 5.65425C62.4998 5.63631 61.8574 5.60478 61.0898 5.58432L59.6943 5.54714L59.5553 5.78708ZM77.3587 33.0527H93.6084V29.3339H81.401V5.72742H77.3587V33.0527ZM158.93 33.0527H162.965L163.03 32.7496C163.065 32.5829 163.093 29.9271 163.092 26.8479L163.09 21.2495H164.071C164.611 21.2495 165.249 21.2864 165.488 21.3315C166.551 21.532 167.786 22.3743 168.915 23.6701C169.878 24.7749 170.783 26.0841 172.632 29.0481C173.549 30.517 174.507 32.0098 174.761 32.3656L175.223 33.0123L177.587 33.0337C178.886 33.0455 179.95 33.0341 179.95 33.0083C179.95 32.9479 178.937 31.4423 177.718 29.6907C177.189 28.9311 176.52 27.918 176.231 27.4395C174.17 24.028 172.461 21.6717 171.566 21.0075C171.032 20.6122 170.572 20.195 170.572 20.1073C170.572 20.0746 170.981 19.7934 171.482 19.4825C171.982 19.1716 172.546 18.7838 172.736 18.6209C173.463 17.9958 174.251 16.6149 174.629 15.306C174.79 14.7455 174.815 14.4802 174.814 13.2863C174.814 11.4581 174.583 10.5957 173.766 9.36645C172.687 7.74359 170.878 6.4901 168.834 5.94836C168.218 5.78522 167.966 5.77568 163.559 5.74795L158.93 5.71893V33.0527ZM182.779 32.9688L182.961 33.0141C183.229 33.0805 183.615 33.0894 185.387 33.0701L186.983 33.0527V5.72742H182.779V32.9688ZM190.395 7.45902C190.408 8.41136 190.45 9.22085 190.487 9.2578C190.524 9.29475 192.606 9.33606 195.115 9.34956L199.676 9.37405V33.0527H203.718V9.3654H213.177V5.72742H190.37L190.395 7.45902ZM216.572 17.3488C216.573 30.5008 216.609 32.937 216.807 33.0151C217.048 33.1099 218.711 33.1556 219.745 33.096L220.776 33.0365V21.2495H235.732V33.0527H239.775V5.72742H235.732V17.5307H220.776V5.72742H216.572L216.572 17.3488ZM245.434 33.0527H249.473L249.535 32.8304C249.569 32.7082 249.597 28.0241 249.597 22.4216V12.2351L249.965 12.6798C250.167 12.9245 252.016 15.2256 254.075 17.7934L257.817 22.4621H258.138C258.414 22.4621 258.522 22.4032 258.902 22.0431C259.146 21.8126 259.915 20.8759 260.61 19.9614C262.195 17.879 264.942 14.3903 265.962 13.1651L266.736 12.2354L266.777 33.0527H270.819V5.72742H267.104L266.516 6.4348C266.192 6.82391 264.765 8.61557 263.345 10.4164C261.204 13.1303 259.369 15.4087 258.487 16.4473C258.396 16.5541 258.287 16.6389 258.244 16.636C258.202 16.633 256.184 14.1797 253.761 11.1844L249.355 5.73825L245.434 5.72742V33.0527ZM38.5735 7.93042C38.5939 7.98604 37.2325 10.0687 35.5481 12.5587C33.8637 15.0487 32.4582 17.1308 32.4249 17.1855C32.378 17.2626 32.2557 17.2648 31.8816 17.1956C31.4217 17.1106 30.9752 17.1692 30.3883 17.3917C30.304 17.4236 29.7867 16.8816 28.6894 15.6113L27.1117 13.785L27.2995 13.4056C27.4027 13.1968 27.5082 12.8235 27.5337 12.5758L27.5802 12.1254L32.9254 9.98596C35.8653 8.80928 38.3304 7.84262 38.4034 7.83793C38.4765 7.83325 38.553 7.87488 38.5735 7.93042ZM36.8071 18.8254C35.3635 24.3605 34.1459 29.0257 34.1012 29.1924C34.0424 29.4121 33.9764 29.4956 33.8615 29.4956C33.7743 29.4956 33.7027 29.4683 33.7024 29.435C33.7021 29.4016 33.3929 27.6651 33.0153 25.576C32.6376 23.487 32.3286 21.7326 32.3286 21.6774C32.3286 21.6222 32.4287 21.525 32.5509 21.4614C32.8963 21.2818 33.3524 20.7843 33.5426 20.3796C33.8439 19.7386 33.7626 18.7271 33.3641 18.159L33.2094 17.9384L36.3059 13.3391C38.009 10.8094 39.4091 8.7446 39.4171 8.75058C39.4252 8.75657 38.2506 13.2902 36.8071 18.8254ZM141.63 9.17477C145.29 9.79889 148.547 12.4822 149.795 15.9016C150.533 17.9217 150.575 20.3471 149.909 22.3445C149.406 23.8511 148.566 25.2197 147.458 26.3391C146.518 27.2893 145.826 27.7855 144.581 28.4042C142.782 29.2977 141.306 29.6193 139.326 29.5493C137.575 29.4873 136.243 29.1531 134.735 28.3968C133.666 27.8611 132.883 27.2952 132.005 26.4235C128.861 23.3042 128.09 18.7284 130.05 14.8224C131.017 12.8956 132.751 11.1844 134.758 10.1754C136.888 9.10476 139.224 8.76465 141.63 9.17477ZM165.985 9.28504C168.316 9.47826 169.607 10.108 170.232 11.3581C171.045 12.9816 170.756 14.9403 169.506 16.2792C168.608 17.2421 167.495 17.5286 164.206 17.6433L163.054 17.6835V9.20371L164.044 9.20501C164.589 9.20574 165.462 9.24171 165.985 9.28504ZM23.7779 14.092C24.3535 14.5849 24.9516 14.6934 26.1495 14.5229C26.2787 14.5044 26.6356 14.867 27.7178 16.1159C28.4883 17.0052 29.2094 17.8311 29.3203 17.9512C29.5039 18.1502 29.5128 18.1916 29.4198 18.4161C29.3636 18.5516 29.2968 18.6625 29.271 18.6625C29.1943 18.6625 17.1927 16.9643 16.9076 16.9131C16.7015 16.8761 16.6448 16.826 16.6448 16.681C16.6448 16.5129 16.949 16.3739 19.9796 15.1577C21.8138 14.4216 23.345 13.8176 23.3824 13.8156C23.4199 13.8135 23.5977 13.9379 23.7779 14.092ZM8.39095 16.7613C10.848 17.1074 12.0838 17.3134 12.1288 17.3843C12.1657 17.4426 12.1964 17.5495 12.1972 17.6219C12.2013 18.0651 12.8075 18.8809 13.3313 19.1481L13.6264 19.2986L12.4682 27.4035C11.3896 34.9521 11.272 35.6427 11.0666 35.6359C11.0162 35.6343 3.10342 17.5704 3.10342 17.457C3.10342 17.4117 3.27772 17.264 3.49075 17.1289C3.70749 16.9914 3.97452 16.7264 4.09708 16.5271C4.27979 16.23 4.34955 16.177 4.5182 16.2076C4.62936 16.2278 6.37211 16.4769 8.39095 16.7613ZM22.9058 18.8235C26.3239 19.3123 29.1414 19.7331 29.1669 19.7586C29.1925 19.7841 29.2586 19.9572 29.3138 20.1432L29.4143 20.4815L28.911 20.9763C28.6342 21.2485 25.2062 24.5008 21.2934 28.2037C17.3805 31.9065 13.9597 35.1492 13.6915 35.4095L13.2039 35.8829L12.8862 35.7209C12.7114 35.6318 12.5211 35.5589 12.4633 35.5589C12.3872 35.5589 12.3714 35.4751 12.4059 35.2557C12.4323 35.089 12.9518 31.4636 13.5605 27.1993L14.6674 19.446L15.0873 19.3091C15.3182 19.2338 15.5721 19.123 15.6516 19.0629C16.0252 18.7799 16.2684 18.5159 16.4113 18.238C16.4971 18.0713 16.5951 17.9349 16.6291 17.9349C16.6632 17.9349 19.4877 18.3347 22.9058 18.8235ZM30.8043 21.5944C31.1787 21.7234 31.2681 21.7901 31.3014 21.9654C31.3238 22.083 31.6453 23.868 32.0158 25.9322C32.5653 28.9934 32.6684 29.6922 32.5756 29.7232C32.3549 29.7967 31.7471 30.4219 31.5821 30.745C31.388 31.1251 31.298 32.0354 31.4199 32.3852L31.5021 32.6209L22.881 34.9826C18.1394 36.2814 14.2219 37.3426 14.1756 37.3408C14.1292 37.339 14.0515 37.1888 14.0031 37.0071L13.9149 36.6769L22.0061 29.0011C27.9098 23.4007 30.1312 21.3406 30.2226 21.3813C30.2915 21.4121 30.5533 21.508 30.8043 21.5944ZM50.1951 38.2268H72.3464V35.9631H50.1951V38.2268Z" fill="#00D4FF"></path>
-      </svg>
+      <svg class="logo-icon" viewBox="0 0 271 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M15.23 0.176419C14.2488 0.650973 13.8082 1.60316 14.0044 2.82503L14.064 3.19684L8.60098 8.12032C4.44471 11.8662 3.09518 13.039 2.95904 13.0234C2.86057 13.0122 2.54358 12.9979 2.25456 12.9917C1.2989 12.9713 0.446481 13.5316 0.115667 14.3977C-0.0634835 14.8669 -0.0293672 15.8154 0.182283 16.2508C0.393852 16.6859 0.938175 17.1868 1.36002 17.3347C1.56302 17.4058 1.78227 17.4912 1.84735 17.5245C1.91243 17.5577 3.80855 21.7837 6.06102 26.9155C9.53724 34.8353 10.1403 36.2647 10.05 36.3688C9.58534 36.9048 9.46812 38.0422 9.80435 38.7522C10.1921 39.571 10.8949 40.003 11.8346 40C12.7835 39.997 13.4019 39.6587 13.8232 38.9123L14.0571 38.4979L32.0957 33.5505L32.5082 33.7646C33.3778 34.2158 34.5521 34.0676 35.193 33.426C35.7115 32.9067 35.8455 32.5634 35.8438 31.7592C35.8421 30.9916 35.736 30.7062 35.272 30.2213L34.9995 29.9365L40.4397 9.05634L40.8104 9.00209C42.0138 8.82585 42.7886 7.93907 42.7886 6.73797C42.7886 6.05718 42.5959 5.57123 42.1485 5.12375C41.2983 4.27368 39.8418 4.24821 38.9694 5.06822C38.8203 5.20848 38.6566 5.32368 38.6056 5.32425C38.2658 5.32805 18.4809 1.87495 18.4633 1.80874C18.337 1.33362 18.1229 0.931017 17.85 0.655339C17.3765 0.177227 17.038 0.0372858 16.281 0.00688841C15.7293 -0.0152629 15.5748 0.00963712 15.23 0.176419ZM28.3267 4.63974C33.6625 5.55328 38.0865 6.31806 38.158 6.33925C38.2425 6.36423 38.2757 6.44071 38.253 6.55785C38.2228 6.71396 37.4863 7.03046 32.7317 8.93095L27.2454 11.1239L26.8488 10.7416C26.2119 10.1278 25.3568 9.93673 24.5189 10.2212C24.1633 10.3419 24.1331 10.3408 24.0009 10.201C23.8978 10.092 19.3691 4.87281 18.2796 3.60736C18.1794 3.49103 18.1763 3.42732 18.2608 3.22335C18.3166 3.08875 18.4214 2.97872 18.4938 2.97872C18.5662 2.97872 22.991 3.7262 28.3267 4.63974ZM15.1592 4.25056C15.4966 4.43957 15.6467 4.47159 16.2002 4.47231C16.6632 4.47296 16.9203 4.43318 17.1053 4.33245L17.3636 4.19178L23.3496 11.0813L23.2174 11.335C23.1435 11.4766 23.0689 11.8607 23.0485 12.2043L23.012 12.82L16.1036 15.5596L15.8352 15.3354C15.2908 14.8809 14.3741 14.7373 13.6321 14.9901C13.1869 15.1418 12.5839 15.6494 12.4421 15.9919C12.3862 16.1268 12.3176 16.2383 12.2897 16.2397C12.2617 16.2411 10.5035 15.9964 8.38246 15.6958L4.5262 15.1494L4.47325 14.8242C4.44414 14.6453 4.32659 14.3246 4.21196 14.1114L4.00354 13.7238L4.20024 13.5336C4.47899 13.2639 14.7277 4.02969 14.7481 4.02969C14.7574 4.02969 14.9424 4.12905 15.1592 4.25056ZM138.557 5.24672C132.657 5.65628 127.526 9.54641 125.713 14.9841C125.202 16.5189 125.101 17.2219 125.099 19.2688C125.098 21.3527 125.174 21.9038 125.679 23.4727C127.996 30.6644 135.73 34.7958 143.389 32.9332C148.245 31.7521 152.244 28.0762 153.706 23.4492C154.189 21.9198 154.277 21.2772 154.277 19.2688C154.277 17.6446 154.254 17.3045 154.096 16.5808C152.988 11.5037 149.329 7.51755 144.295 5.90544C142.568 5.3523 140.484 5.113 138.557 5.24672ZM109.211 5.45449C105.355 5.80163 102.468 7.0548 100.112 9.40421C97.9763 11.5335 96.582 14.2749 96.0198 17.4498C95.8566 18.3718 95.8828 21.0088 96.0653 22.0175C96.7805 25.9709 99.1917 29.3641 102.791 31.4825C104.632 32.5659 106.389 33.0842 108.954 33.3006C110.533 33.4338 112.926 33.3603 114.183 33.14C116.234 32.7804 119.264 31.9137 120.293 31.3924L120.691 31.1906V27.7692C120.691 25.8875 120.715 23.2505 120.745 21.9094L120.798 19.4709H111.475V23.1089H116.73V28.6708L115.052 29.0828C112.695 29.6616 111.656 29.8257 110.343 29.8263C108.21 29.8274 106.47 29.2841 104.523 28.0081C102.234 26.5088 100.724 24.1893 100.227 21.4112C100.069 20.5275 100.091 18.4697 100.268 17.574C101.136 13.1824 104.065 10.0758 108.12 9.24527C109.689 8.92383 111.389 8.92521 113.294 9.24963C115.145 9.56476 116.432 10.008 118.824 11.155C119.553 11.5046 120.162 11.7907 120.178 11.7907C120.193 11.7907 120.206 10.8691 120.206 9.74262V7.69452L119.499 7.36039C118.244 6.76788 115.703 6.02032 113.658 5.64237C112.751 5.4747 110.189 5.36645 109.211 5.45449ZM59.5553 5.78708C59.3486 6.14376 58.6455 7.77568 57.3394 10.9301C56.6977 12.48 55.697 14.8447 55.1155 16.185C52.4752 22.2721 51.9129 23.5841 51.2305 25.251C50.8299 26.2294 50.0833 28.0121 49.5713 29.2126C48.5564 31.5919 48.0932 32.76 48.0932 32.9398C48.0932 33.0377 48.4109 33.0522 50.16 33.0339L52.2269 33.0123L56.6046 22.5241C59.0124 16.7556 61.0088 12.0626 61.0412 12.0952C61.0735 12.1278 63.2067 16.8475 65.7817 22.5834L70.4634 33.0123L72.5367 33.0339C73.677 33.0458 74.61 33.038 74.61 33.0166C74.61 32.9652 62.5589 5.69654 62.5175 5.65425C62.4998 5.63631 61.8574 5.60478 61.0898 5.58432L59.6943 5.54714L59.5553 5.78708ZM77.3587 33.0527H93.6084V29.3339H81.401V5.72742H77.3587V33.0527ZM158.93 33.0527H162.965L163.03 32.7496C163.065 32.5829 163.093 29.9271 163.092 26.8479L163.09 21.2495H164.071C164.611 21.2495 165.249 21.2864 165.488 21.3315C166.551 21.532 167.786 22.3743 168.915 23.6701C169.878 24.7749 170.783 26.0841 172.632 29.0481C173.549 30.517 174.507 32.0098 174.761 32.3656L175.223 33.0123L177.587 33.0337C178.886 33.0455 179.95 33.0341 179.95 33.0083C179.95 32.9479 178.937 31.4423 177.718 29.6907C177.189 28.9311 176.52 27.918 176.231 27.4395C174.17 24.028 172.461 21.6717 171.566 21.0075C171.032 20.6122 170.572 20.195 170.572 20.1073C170.572 20.0746 170.981 19.7934 171.482 19.4825C171.982 19.1716 172.546 18.7838 172.736 18.6209C173.463 17.9958 174.251 16.6149 174.629 15.306C174.79 14.7455 174.815 14.4802 174.814 13.2863C174.814 11.4581 174.583 10.5957 173.766 9.36645C172.687 7.74359 170.878 6.4901 168.834 5.94836C168.218 5.78522 167.966 5.77568 163.559 5.74795L158.93 5.71893V33.0527ZM182.779 32.9688L182.961 33.0141C183.229 33.0805 183.615 33.0894 185.387 33.0701L186.983 33.0527V5.72742H182.779V32.9688ZM190.395 7.45902C190.408 8.41136 190.45 9.22085 190.487 9.2578C190.524 9.29475 192.606 9.33606 195.115 9.34956L199.676 9.37405V33.0527H203.718V9.3654H213.177V5.72742H190.37L190.395 7.45902ZM216.572 17.3488C216.573 30.5008 216.609 32.937 216.807 33.0151C217.048 33.1099 218.711 33.1556 219.745 33.096L220.776 33.0365V21.2495H235.732V33.0527H239.775V5.72742H235.732V17.5307H220.776V5.72742H216.572L216.572 17.3488ZM245.434 33.0527H249.473L249.535 32.8304C249.569 32.7082 249.597 28.0241 249.597 22.4216V12.2351L249.965 12.6798C250.167 12.9245 252.016 15.2256 254.075 17.7934L257.817 22.4621H258.138C258.414 22.4621 258.522 22.4032 258.902 22.0431C259.146 21.8126 259.915 20.8759 260.61 19.9614C262.195 17.879 264.942 14.3903 265.962 13.1651L266.736 12.2354L266.777 33.0527H270.819V5.72742H267.104L266.516 6.4348C266.192 6.82391 264.765 8.61557 263.345 10.4164C261.204 13.1303 259.369 15.4087 258.487 16.4473C258.396 16.5541 258.287 16.6389 258.244 16.636C258.202 16.633 256.184 14.1797 253.761 11.1844L249.355 5.73825L245.434 5.72742V33.0527ZM38.5735 7.93042C38.5939 7.98604 37.2325 10.0687 35.5481 12.5587C33.8637 15.0487 32.4582 17.1308 32.4249 17.1855C32.378 17.2626 32.2557 17.2648 31.8816 17.1956C31.4217 17.1106 30.9752 17.1692 30.3883 17.3917C30.304 17.4236 29.7867 16.8816 28.6894 15.6113L27.1117 13.785L27.2995 13.4056C27.4027 13.1968 27.5082 12.8235 27.5337 12.5758L27.5802 12.1254L32.9254 9.98596C35.8653 8.80928 38.3304 7.84262 38.4034 7.83793C38.4765 7.83325 38.553 7.87488 38.5735 7.93042ZM36.8071 18.8254C35.3635 24.3605 34.1459 29.0257 34.1012 29.1924C34.0424 29.4121 33.9764 29.4956 33.8615 29.4956C33.7743 29.4956 33.7027 29.4683 33.7024 29.435C33.7021 29.4016 33.3929 27.6651 33.0153 25.576C32.6376 23.487 32.3286 21.7326 32.3286 21.6774C32.3286 21.6222 32.4287 21.525 32.5509 21.4614C32.8963 21.2818 33.3524 20.7843 33.5426 20.3796C33.8439 19.7386 33.7626 18.7271 33.3641 18.159L33.2094 17.9384L36.3059 13.3391C38.009 10.8094 39.4091 8.7446 39.4171 8.75058C39.4252 8.75657 38.2506 13.2902 36.8071 18.8254ZM141.63 9.17477C145.29 9.79889 148.547 12.4822 149.795 15.9016C150.533 17.9217 150.575 20.3471 149.909 22.3445C149.406 23.8511 148.566 25.2197 147.458 26.3391C146.518 27.2893 145.826 27.7855 144.581 28.4042C142.782 29.2977 141.306 29.6193 139.326 29.5493C137.575 29.4873 136.243 29.1531 134.735 28.3968C133.666 27.8611 132.883 27.2952 132.005 26.4235C128.861 23.3042 128.09 18.7284 130.05 14.8224C131.017 12.8956 132.751 11.1844 134.758 10.1754C136.888 9.10476 139.224 8.76465 141.63 9.17477ZM165.985 9.28504C168.316 9.47826 169.607 10.108 170.232 11.3581C171.045 12.9816 170.756 14.9403 169.506 16.2792C168.608 17.2421 167.495 17.5286 164.206 17.6433L163.054 17.6835V9.20371L164.044 9.20501C164.589 9.20574 165.462 9.24171 165.985 9.28504ZM23.7779 14.092C24.3535 14.5849 24.9516 14.6934 26.1495 14.5229C26.2787 14.5044 26.6356 14.867 27.7178 16.1159C28.4883 17.0052 29.2094 17.8311 29.3203 17.9512C29.5039 18.1502 29.5128 18.1916 29.4198 18.4161C29.3636 18.5516 29.2968 18.6625 29.271 18.6625C29.1943 18.6625 17.1927 16.9643 16.9076 16.9131C16.7015 16.8761 16.6448 16.826 16.6448 16.681C16.6448 16.5129 16.949 16.3739 19.9796 15.1577C21.8138 14.4216 23.345 13.8176 23.3824 13.8156C23.4199 13.8135 23.5977 13.9379 23.7779 14.092ZM8.39095 16.7613C10.848 17.1074 12.0838 17.3134 12.1288 17.3843C12.1657 17.4426 12.1964 17.5495 12.1972 17.6219C12.2013 18.0651 12.8075 18.8809 13.3313 19.1481L13.6264 19.2986L12.4682 27.4035C11.3896 34.9521 11.272 35.6427 11.0666 35.6359C11.0162 35.6343 3.10342 17.5704 3.10342 17.457C3.10342 17.4117 3.27772 17.264 3.49075 17.1289C3.70749 16.9914 3.97452 16.7264 4.09708 16.5271C4.27979 16.23 4.34955 16.177 4.5182 16.2076C4.62936 16.2278 6.37211 16.4769 8.39095 16.7613ZM22.9058 18.8235C26.3239 19.3123 29.1414 19.7331 29.1669 19.7586C29.1925 19.7841 29.2586 19.9572 29.3138 20.1432L29.4143 20.4815L28.911 20.9763C28.6342 21.2485 25.2062 24.5008 21.2934 28.2037C17.3805 31.9065 13.9597 35.1492 13.6915 35.4095L13.2039 35.8829L12.8862 35.7209C12.7114 35.6318 12.5211 35.5589 12.4633 35.5589C12.3872 35.5589 12.3714 35.4751 12.4059 35.2557C12.4323 35.089 12.9518 31.4636 13.5605 27.1993L14.6674 19.446L15.0873 19.3091C15.3182 19.2338 15.5721 19.123 15.6516 19.0629C16.0252 18.7799 16.2684 18.5159 16.4113 18.238C16.4971 18.0713 16.5951 17.9349 16.6291 17.9349C16.6632 17.9349 19.4877 18.3347 22.9058 18.8235ZM30.8043 21.5944C31.1787 21.7234 31.2681 21.7901 31.3014 21.9654C31.3238 22.083 31.6453 23.868 32.0158 25.9322C32.5653 28.9934 32.6684 29.6922 32.5756 29.7232C32.3549 29.7967 31.7471 30.4219 31.5821 30.745C31.388 31.1251 31.298 32.0354 31.4199 32.3852L31.5021 32.6209L22.881 34.9826C18.1394 36.2814 14.2219 37.3426 14.1756 37.3408C14.1292 37.339 14.0515 37.1888 14.0031 37.0071L13.9149 36.6769L22.0061 29.0011C27.9098 23.4007 30.1312 21.3406 30.2226 21.3813C30.2915 21.4121 30.5533 21.508 30.8043 21.5944ZM50.1951 38.2268H72.3464V35.9631H50.1951V38.2268Z" fill="#00D4FF"/></svg>
     </div>
-    <button class="btn-help" id="btnHelp" onclick="openHelpEmail()">
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
-        <path d="M8 11.5v.5M8 4.5c-1.5 0-2.5 1-2.5 2 0 1 .5 1.5 1.5 2 .5.25.75.5.75 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
+    <button class="btn-help" onclick="openHelpEmail()">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 11.5v.5M8 4.5c-1.5 0-2.5 1-2.5 2 0 1 .5 1.5 1.5 2 .5.25.75.5.75 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
       Need Help?
     </button>
   </div>
 </div>
 
 <div class="container">
-
-  <!-- HERO -->
   <div class="hero">
     <div class="hero-label" id="heroLabel">Algorithm</div>
     <h1 id="heroHeading">What can we<br><span class="highlight">fix for you today?</span></h1>
     <p id="heroSubtitle">Tell us what you need and we'll take it from there. You'll get a confirmation with exactly what to expect and when.</p>
   </div>
 
-  <!-- CLIENT DETAILS (hidden when pre-filled) -->
   <div class="card" id="detailsCard">
     <div class="card-label">About you</div>
     <div class="row2">
@@ -836,14 +241,12 @@ body {
     </div>
   </div>
 
-  <!-- TASKS -->
   <div id="tasksWrap"></div>
   <button type="button" class="btn-add" onclick="addTask()">
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     Add another task
   </button>
 
-  <!-- SUBMIT -->
   <div class="submit-bar">
     <div class="submit-text">
       <strong>Ready to send?</strong>
@@ -851,18 +254,12 @@ body {
     </div>
     <button class="btn-submit" id="submitBtn" onclick="handleSubmit()">Send request →</button>
   </div>
-
 </div>
 
-<!-- OVERLAY -->
 <div class="overlay" id="overlay">
-  <div class="spinner-box">
-    <div class="spinner"></div>
-    <p>Sending your request…</p>
-  </div>
+  <div class="spinner-box"><div class="spinner"></div><p>Sending your request…</p></div>
 </div>
 
-<!-- HELP CHAT MODAL -->
 <div class="help-modal" id="helpModal">
   <div class="help-chat">
     <div class="help-header">
@@ -874,45 +271,26 @@ body {
         </div>
       </div>
       <button class="btn-close-help" onclick="closeHelpChat()">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M5 5l10 10M15 5l-10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5l-10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
       </button>
     </div>
-    
     <div class="help-body" id="helpForm">
       <p class="help-intro">Have a question about submitting a task? Send us a message and <span id="helpAssignedName">we'll</span> get back to you shortly.</p>
-      
-      <div class="help-field">
-        <label>Your name</label>
-        <input type="text" id="helpName" placeholder="Jane Smith" />
-      </div>
-      
-      <div class="help-field">
-        <label>Your email</label>
-        <input type="email" id="helpEmail" placeholder="you@company.com" />
-      </div>
-      
-      <div class="help-field">
-        <label>Your question</label>
-        <textarea id="helpMessage" rows="4" placeholder="How can we help you?"></textarea>
-      </div>
-      
+      <div class="help-field"><label>Your name</label><input type="text" id="helpName" placeholder="Jane Smith"/></div>
+      <div class="help-field"><label>Your email</label><input type="email" id="helpEmail" placeholder="you@company.com"/></div>
+      <div class="help-field"><label>Your question</label><textarea id="helpMessage" rows="4" placeholder="How can we help you?"></textarea></div>
       <div class="help-actions">
         <button class="btn-cancel-help" onclick="closeHelpChat()">Cancel</button>
         <button class="btn-send-help" id="btnSendHelp" onclick="sendHelpMessage()">Send message</button>
       </div>
     </div>
-    
     <div class="help-success" id="helpSuccess">
       <div class="help-success-icon">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#2D7A4F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="5,15 11,21 23,9"/>
-        </svg>
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#1DD1A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5,15 11,21 23,9"/></svg>
       </div>
       <h3>Message sent!</h3>
-      <p id="helpSuccessMsg">Your message has been sent to our team. We'll get back to you shortly.</p>
-      <button class="btn-send-help" onclick="closeHelpChat()" style="margin-top: 20px;">Close</button>
+      <p id="helpSuccessMsg">Your message has been sent. We'll get back to you shortly.</p>
+      <button class="btn-send-help" onclick="closeHelpChat()" style="margin-top:20px">Close</button>
     </div>
   </div>
 </div>
@@ -920,588 +298,424 @@ body {
 <script>
 const FORMSPREE_ID = 'YOUR_FORM_ID';
 
-const UMAP = {
-  urgent: {
-    tier:     'P1 — Critical',
-    eta:      'Same day or within 24 hours',
-    ack:      'within 2 business hours',
-    etaMsg:   '⚡ <strong>Urgent:</strong> We\'ll acknowledge this within 2 business hours.',
-    pillText: 'Urgent',
-  },
-  normal: {
-    tier:     'P2 — Important',
-    eta:      '2–5 business days',
-    ack:      'within 1 business day',
-    etaMsg:   '📋 <strong>This week:</strong> We\'ll have this underway within 2–5 business days.',
-    pillText: 'This week',
-  },
-  planned: {
-    tier:     'P3 — Planned',
-    eta:      '1–3 weeks',
-    ack:      'within 2 business days',
-    etaMsg:   '🗓️ <strong>No rush:</strong> We\'ll schedule this and confirm a start date within a few days.',
-    pillText: 'No rush',
-  },
+const REQ_TYPES = {
+  fix:     { label:'Fix something broken',    icon:'🔧', sub:'Bug, error, or broken feature',      fields:['what','where','steps'] },
+  update:  { label:'Update existing content', icon:'✏️', sub:'Text, images, or page content',       fields:['what','where','copy'] },
+  design:  { label:'Design / UX change',      icon:'🎨', sub:'Visual or layout improvements',       fields:['what','where','ref'] },
+  newpage: { label:'New page',                icon:'📄', sub:'Build a brand new page',              fields:['what','goal','ref'] },
+  other:   { label:'Something else',          icon:'💬', sub:'Not sure? Just describe it',          fields:['what','where'] },
 };
 
-// ══════════════════════════════════════════════════════════
-// CLIENT ROUTING — Auto-assigns submissions to team members
-// ══════════════════════════════════════════════════════════
+const PRI_MAP = {
+  p1:{ tag:'P1 – Critical', title:'Immediate attention', lead:'Lead time: same day or within 24 hrs', sub:'Something is broken or directly impacting revenue', examples:['Website is down or key pages not loading','Contact forms / lead submissions not working'], eta:'⚡ <strong>Critical:</strong> Flagged for immediate attention. We\'ll be in touch within 2 business hours.', pillText:'Critical' },
+  p2:{ tag:'P2 – High',     title:'Time-sensitive',      lead:'Lead time: 2–5 business days',         sub:'Important work tied to campaigns or performance',   examples:['New landing page for a live or launching campaign','Key page updates impacting conversions or paid traffic'], eta:'📋 <strong>This week:</strong> We\'ll have this underway within 2–5 business days.', pillText:'This week' },
+  p3:{ tag:'P3 – Planned',  title:'Standard turnaround', lead:'Lead time: 5–7 business days',         sub:'Routine updates or non-urgent work',                 examples:['Content updates or minor design improvements','New page not tied to an immediate campaign'], eta:'🗓️ <strong>Planned:</strong> We\'ll schedule this in our next available sprint.', pillText:'Planned' },
+};
+
 const CLIENT_ROUTING = {
-  // Zanthe's clients
-  'subaru':       'zanthe@algorithm.agency',
-  'environ':      'zanthe@algorithm.agency',
-  'timbercity':   'zanthe@algorithm.agency',
-  'buyco':        'zanthe@algorithm.agency',
-  
-  // Jemima's clients
-  'unispan':      'jemima@algorithm.agency',
-  'uni-span':     'jemima@algorithm.agency',
-  'goscor':       'jemima@algorithm.agency',
-  'servest':      'jemima@algorithm.agency',
-  'thanda':       'jemima@algorithm.agency',
-  
-  // Sarah's clients
-  'winklmayr':    'sarah@algorithm.agency',
-  
-  // Daniel's clients
-  'solugrowth':   'daniel@algorithm.agency',
-  
-  // Siza's clients
-  'm7group':      'sizakele@algorithm.agency',
-  'm7':           'sizakele@algorithm.agency',
+  'subaru':'zanthe@algorithm.agency','environ':'zanthe@algorithm.agency','timbercity':'zanthe@algorithm.agency','buyco':'zanthe@algorithm.agency',
+  'unispan':'jemima@algorithm.agency','uni-span':'jemima@algorithm.agency','goscor':'jemima@algorithm.agency','servest':'jemima@algorithm.agency','thanda':'jemima@algorithm.agency',
+  'winklmayr':'sarah@algorithm.agency','solugrowth':'daniel@algorithm.agency','m7group':'sizakele@algorithm.agency','m7':'sizakele@algorithm.agency',
 };
+const DEFAULT_EMAIL = 'YOUR_FORM_ID';
 
-// Default fallback email if no match found
-const DEFAULT_EMAIL = 'YOUR_FORM_ID'; // Falls back to Formspree default
-
-// Function to determine which team member should receive this submission
-function getAssignedEmail(companyName) {
-  if (!companyName) return DEFAULT_EMAIL;
-  
-  // Normalize company name: lowercase, remove spaces/punctuation
-  const normalized = companyName.toLowerCase()
-    .replace(/[^a-z0-9]/g, '')
-    .trim();
-  
-  // Check for exact matches
-  if (CLIENT_ROUTING[normalized]) {
-    return CLIENT_ROUTING[normalized];
-  }
-  
-  // Check for partial matches (e.g. "Subaru South Africa" matches "subaru")
-  for (const [key, email] of Object.entries(CLIENT_ROUTING)) {
-    if (normalized.includes(key) || key.includes(normalized)) {
-      return email;
-    }
-  }
-  
-  // No match found - use default
+function getAssignedEmail(company) {
+  if (!company) return DEFAULT_EMAIL;
+  const n = company.toLowerCase().replace(/[^a-z0-9]/g,'').trim();
+  if (CLIENT_ROUTING[n]) return CLIENT_ROUTING[n];
+  for (const [k,v] of Object.entries(CLIENT_ROUTING)) if (n.includes(k)||k.includes(n)) return v;
   return DEFAULT_EMAIL;
 }
 
-let prefilled = false;
-let preClient = {};
-
-(function initPrefill() {
-  const p = new URLSearchParams(window.location.search);
-  const name    = p.get('name')    || '';
-  const company = p.get('company') || '';
-  const email   = p.get('email')   || '';
-  const site    = p.get('site')    || '';
-
-  if (name || company || email) {
-    document.getElementById('detailsCard').style.display = 'none';
-    prefilled = true;
-    preClient = { name, company, email, site };
-
-    const firstName = name.split(' ')[0];
-    document.getElementById('heroLabel').textContent = company || 'Algorithm';
-    document.getElementById('heroHeading').innerHTML =
-      `Hi ${firstName},<br>what can we <span class="highlight">help you with?</span>`;
-    document.getElementById('heroSubtitle').textContent =
-      `Just describe what you need — we'll handle the rest and confirm exactly when to expect it.`;
+let prefilled=false, preClient={};
+(function(){
+  const p=new URLSearchParams(window.location.search);
+  const name=p.get('name')||'', company=p.get('company')||'', email=p.get('email')||'', site=p.get('site')||'';
+  if (name||company||email) {
+    document.getElementById('detailsCard').style.display='none';
+    prefilled=true; preClient={name,company,email,site};
+    const fn=name.split(' ')[0];
+    document.getElementById('heroLabel').textContent=company||'Algorithm';
+    document.getElementById('heroHeading').innerHTML=`Hi ${fn},<br>what can we <span class="highlight">help you with?</span>`;
+    document.getElementById('heroSubtitle').textContent=`Just describe what you need — we'll handle the rest and confirm exactly when to expect it.`;
   }
 })();
 
-/* ═══════════════════════════════════════════════
-   HELP CHAT FUNCTIONS
-═══════════════════════════════════════════════ */
-function openHelpEmail() {
-  const modal = document.getElementById('helpModal');
-  modal.classList.add('show');
-  
-  // Pre-fill with client info if available
-  if (prefilled && preClient.name) {
-    document.getElementById('helpName').value = preClient.name;
-    document.getElementById('helpEmail').value = preClient.email || '';
-    
-    // Get assigned team member
-    const assignedEmail = getAssignedEmail(preClient.company);
-    const assignedName = assignedEmail.split('@')[0].charAt(0).toUpperCase() + assignedEmail.split('@')[0].slice(1);
-    
-    document.getElementById('helpAgentName').textContent = `Chat with ${assignedName}`;
-    document.getElementById('helpAgentRole').textContent = 'Your account manager';
-    document.getElementById('helpAssignedName').textContent = `${assignedName} will`;
-  }
-}
-
-function closeHelpChat() {
-  const modal = document.getElementById('helpModal');
-  modal.classList.remove('show');
-  
-  // Reset form after a delay
-  setTimeout(() => {
-    document.getElementById('helpForm').style.display = 'block';
-    document.getElementById('helpSuccess').classList.remove('show');
-    document.getElementById('helpName').value = '';
-    document.getElementById('helpEmail').value = '';
-    document.getElementById('helpMessage').value = '';
-  }, 300);
-}
-
-async function sendHelpMessage() {
-  const name = document.getElementById('helpName').value.trim();
-  const email = document.getElementById('helpEmail').value.trim();
-  const message = document.getElementById('helpMessage').value.trim();
-  
-  if (!name || !email || !message) {
-    alert('Please fill in all fields');
-    return;
-  }
-  
-  if (!email.includes('@')) {
-    alert('Please enter a valid email address');
-    return;
-  }
-  
-  const btn = document.getElementById('btnSendHelp');
-  btn.disabled = true;
-  btn.textContent = 'Sending...';
-  
-  // Determine recipient
-  let recipientEmail = 'support@algorithm.agency'; // Default
-  let recipientName = 'the team';
-  
-  if (prefilled && preClient.company) {
-    recipientEmail = getAssignedEmail(preClient.company);
-    recipientName = recipientEmail.split('@')[0].charAt(0).toUpperCase() + recipientEmail.split('@')[0].slice(1);
-  }
-  
-  // Send via Formspree
-  const payload = {
-    _subject: `Help Request from ${name}`,
-    _replyto: email,
-    _cc: recipientEmail,
-    _bcc: 'ashlin@algorithm.agency,sarah@algorithm.agency', // Always BCC Ashlin and Sarah
-    name: name,
-    email: email,
-    message: message,
-    type: 'help_request',
-    assigned_to: recipientName,
-  };
-  
-  try {
-    const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-      method: 'POST',
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-    
-    if (res.ok) {
-      // Show success message
-      document.getElementById('helpForm').style.display = 'none';
-      document.getElementById('helpSuccess').classList.add('show');
-      document.getElementById('helpSuccessMsg').textContent = 
-        `Your message has been sent to ${recipientName}. We'll get back to you shortly.`;
-    } else {
-      throw new Error('Failed to send message');
-    }
-  } catch (err) {
-    alert('Failed to send message. Please try again or email us directly.');
-    btn.disabled = false;
-    btn.textContent = 'Send message';
-  }
-}
-
-let taskCount = 0;
+let taskCount=0;
 
 function addTask() {
   taskCount++;
-  const id = taskCount;
-  const wrap = document.getElementById('tasksWrap');
-  const div  = document.createElement('div');
-  div.className = 'task-card';
-  div.id = `tc-${id}`;
-  div.dataset.urg = '';
-
-  const isFirst = wrap.children.length === 0;
-
-  div.innerHTML = `
+  const id=taskCount;
+  const wrap=document.getElementById('tasksWrap');
+  const isFirst=wrap.children.length===0;
+  const div=document.createElement('div');
+  div.className='task-card'; div.id=`tc-${id}`; div.dataset.pri='';
+  div.innerHTML=`
     <div class="task-stripe"></div>
     <div class="task-header">
       <div class="task-header-left">
-        <span class="task-num">${isFirst ? 'Your request' : `Task #${id}`}</span>
+        <span class="task-num">${isFirst?'Your request':`Task #${id}`}</span>
         <span class="task-pill" id="pill-${id}"></span>
       </div>
-      ${!isFirst ? `<button type="button" class="btn-remove" onclick="removeTask(${id})">
-        <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 1l8 8M9 1l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        Remove
-      </button>` : ''}
+      ${!isFirst?`<button type="button" class="btn-remove" onclick="removeTask(${id})"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M1 1l8 8M9 1l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg> Remove</button>`:''}
     </div>
     <div class="task-body">
 
-      <div class="micro-q" id="mq-what-${id}">
-        <label>What do you need? <span style="color:var(--cyan)">*</span></label>
-        <input
-          type="text"
-          class="q-what"
-          id="q-what-${id}"
-          placeholder="e.g. The contact form on the homepage isn't sending emails"
-          oninput="clearMicroErr('mq-what-${id}','q-what-${id}')"
-        />
-        <div class="micro-err" id="merr-what-${id}">⚠ Please describe what you need</div>
+      <div class="task-section">
+        <div class="section-title">Request type</div>
+        <div class="req-type-grid" id="rtg-${id}">
+          ${Object.entries(REQ_TYPES).map(([k,v])=>`
+          <button type="button" class="req-btn" data-type="${k}" onclick="setReqType(${id},'${k}',this)">
+            <span class="req-btn-icon">${v.icon}</span>
+            <span class="req-btn-title">${v.label}</span>
+            <span class="req-btn-sub">${v.sub}</span>
+          </button>`).join('')}
+        </div>
+        <div class="req-err" id="rerr-${id}">⚠ Please select a request type</div>
       </div>
 
-      <div class="micro-q" id="mq-where-${id}">
-        <label>
-          Where on the site?
-          <span class="opt">optional if not applicable</span>
-        </label>
-        <input
-          type="text"
-          class="q-where"
-          id="q-where-${id}"
-          placeholder="e.g. Homepage › Contact section — or paste the URL"
-        />
+      <div class="task-section">
+        <div class="section-title">Details</div>
+        <div class="micro-q" id="mq-what-${id}">
+          <label>What do you need? <span style="color:var(--cyan)">*</span></label>
+          <textarea class="q-what" id="q-what-${id}" rows="2" placeholder="Describe what needs to be done…" oninput="clearMicroErr('mq-what-${id}','q-what-${id}')"></textarea>
+          <div class="micro-err" id="merr-what-${id}">⚠ Please describe what you need</div>
+        </div>
+        <div class="micro-q cond-field" id="mq-where-${id}" style="display:none">
+          <label>Where on the site? <span class="opt">optional</span></label>
+          <input type="text" class="q-where" id="q-where-${id}" placeholder="e.g. Homepage › Contact section — or paste the URL"/>
+        </div>
+        <div class="micro-q cond-field" id="mq-steps-${id}" style="display:none">
+          <label>Steps to reproduce <span class="opt">optional</span></label>
+          <textarea class="q-steps" id="q-steps-${id}" rows="2" placeholder="e.g. 1. Go to contact page  2. Fill in form  3. Click submit — nothing happens"></textarea>
+        </div>
+        <div class="micro-q cond-field" id="mq-goal-${id}" style="display:none">
+          <label>What's the goal of this page? <span class="opt">optional</span></label>
+          <input type="text" class="q-goal" id="q-goal-${id}" placeholder="e.g. Capture leads from our Google Ads campaign"/>
+        </div>
+        <div class="micro-q cond-field" id="mq-ref-${id}" style="display:none">
+          <label>Reference links or examples <span class="opt">optional</span></label>
+          <input type="text" class="q-ref" id="q-ref-${id}" placeholder="Paste any URLs that inspired the design or direction"/>
+        </div>
+        <div class="micro-q">
+          <label>Anything else we should know? <span class="opt">optional</span></label>
+          <textarea class="q-more" id="q-more-${id}" rows="2" placeholder="Extra context, constraints, or background that helps explain it…"></textarea>
+        </div>
       </div>
 
-      <div class="micro-q" id="mq-more-${id}">
-        <label>
-          Anything else we should know?
-          <span class="opt">optional</span>
-        </label>
-        <textarea
-          class="q-more"
-          id="q-more-${id}"
-          rows="3"
-          placeholder="Any extra context, screenshots, reference links, or examples that help explain it…"
-        ></textarea>
-      </div>
-
-      <div class="file-upload" id="file-wrap-${id}" onclick="document.getElementById('file-${id}').click()">
-        <label class="file-upload-label">
-          Attach files
-          <span class="opt">images, PDFs, documents</span>
-        </label>
-        <div class="file-input-area">
-          <div class="file-btn">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-            Choose files
+      <div class="task-section">
+        <div class="section-title">Content &amp; assets</div>
+        <div class="assets-grid">
+          <div class="asset-block">
+            <div class="asset-block-title">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 2h10v10H2z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M4 6h6M4 8.5h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+              Copy / text provided?
+            </div>
+            <div class="yn-row">
+              <button type="button" class="yn-btn" onclick="setAsset(${id},'copy','yes',this)">Yes, I have it</button>
+              <button type="button" class="yn-btn" onclick="setAsset(${id},'copy','needs',this)">Needs writing</button>
+              <button type="button" class="yn-btn" onclick="setAsset(${id},'copy','no',this)">N/A</button>
+            </div>
+            <div class="asset-upload" id="copy-upload-${id}">
+              <div class="upload-area" onclick="document.getElementById('copy-file-${id}').click()">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                <span class="upload-btn-label">Attach copy doc</span>
+                <span class="upload-name" id="copy-fn-${id}">No file</span>
+              </div>
+              <input type="file" id="copy-file-${id}" style="display:none" accept=".doc,.docx,.txt,.pdf" onchange="updateUploadDisplay('copy-file-${id}','copy-fn-${id}')"/>
+            </div>
           </div>
-          <span class="file-name" id="file-display-${id}">No files selected</span>
+          <div class="asset-block">
+            <div class="asset-block-title">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="1" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M1 9l3-3 3 3 2-2 4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="4.5" r="1" fill="currentColor"/></svg>
+              Images / visuals provided?
+            </div>
+            <div class="yn-row">
+              <button type="button" class="yn-btn" onclick="setAsset(${id},'img','yes',this)">Yes, I have them</button>
+              <button type="button" class="yn-btn" onclick="setAsset(${id},'img','needs',this)">Stock needed</button>
+              <button type="button" class="yn-btn" onclick="setAsset(${id},'img','no',this)">N/A</button>
+            </div>
+            <div class="asset-upload" id="img-upload-${id}">
+              <div class="upload-area" onclick="document.getElementById('img-file-${id}').click()">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                <span class="upload-btn-label">Attach images</span>
+                <span class="upload-name" id="img-fn-${id}">No files</span>
+              </div>
+              <input type="file" id="img-file-${id}" style="display:none" multiple accept="image/*,.zip" onchange="updateUploadDisplay('img-file-${id}','img-fn-${id}')"/>
+            </div>
+          </div>
         </div>
-        <input
-          type="file"
-          id="file-${id}"
-          class="file-hidden q-files"
-          multiple
-          accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.zip"
-          onchange="updateFileDisplay(${id})"
-        />
-        <div class="file-hint">Files will be listed in the email (file upload requires Formspree paid plan)</div>
+        <div class="micro-q">
+          <label>Brand / tone considerations <span class="opt">optional</span></label>
+          <input type="text" class="q-brand" id="q-brand-${id}" placeholder="e.g. Keep it formal, avoid red, match the homepage style…"/>
+        </div>
       </div>
 
-      <div class="task-divider"></div>
-
-      <div>
-        <div class="urg-label">How urgent is this? <span class="req" style="color:var(--cyan)">*</span></div>
-        <div class="urg-grid">
-          <button type="button" class="urg-btn" onclick="setUrg(${id},'urgent',this)">
-            <span class="urg-icon">🚨</span>
-            <span class="urg-title">It's urgent</span>
-            <span class="urg-sub">Affecting the site or business right now</span>
-          </button>
-          <button type="button" class="urg-btn" onclick="setUrg(${id},'normal',this)">
-            <span class="urg-icon">📋</span>
-            <span class="urg-title">This week</span>
-            <span class="urg-sub">Important but not stopping anything</span>
-          </button>
-          <button type="button" class="urg-btn" onclick="setUrg(${id},'planned',this)">
-            <span class="urg-icon">🗓️</span>
-            <span class="urg-title">No rush</span>
-            <span class="urg-sub">Improvement or idea, whenever there's bandwidth</span>
-          </button>
+      <div class="task-section">
+        <div class="section-title">Priority</div>
+        <div class="pri-grid">
+          ${Object.entries(PRI_MAP).map(([k,v])=>`
+          <button type="button" class="pri-btn" data-level="${k}" onclick="setPri(${id},'${k}',this)">
+            <span class="pri-tag">${v.tag}</span>
+            <span class="pri-title">${v.title}</span>
+            <span class="pri-lead">${v.lead}</span>
+            <span class="pri-sub">${v.sub}</span>
+            <div class="pri-examples">${v.examples.map(e=>`<span>${e}</span>`).join('')}</div>
+          </button>`).join('')}
         </div>
-        <div class="eta-box" id="eta-${id}"></div>
-        <div class="urg-err" id="uerr-${id}">⚠ Please select how urgent this is</div>
+        <div class="pri-eta" id="peta-${id}"></div>
+        <div class="pri-note">⚠ Anything requiring back-end development may need additional time or a separate quote. Your Client Impact Manager will be in touch.</div>
+        <div class="pri-err" id="perr-${id}">⚠ Please select a priority level</div>
       </div>
 
     </div>`;
-
   wrap.appendChild(div);
-  if (!isFirst) {
-    setTimeout(() => div.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
-  }
+  if (!isFirst) setTimeout(()=>div.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
 }
 
 function removeTask(id) {
-  const el = document.getElementById(`tc-${id}`);
+  const el=document.getElementById(`tc-${id}`);
   if (!el) return;
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(-8px)';
-  setTimeout(() => el.remove(), 200);
+  el.style.opacity='0'; el.style.transform='translateY(-8px)';
+  setTimeout(()=>el.remove(),200);
 }
 
-function setUrg(id, urg, btn) {
-  const card = document.getElementById(`tc-${id}`);
-  card.dataset.urg = urg;
-  card.querySelectorAll('.urg-btn').forEach(b => delete b.dataset.sel);
-  btn.dataset.sel = urg;
-
-  const pill = document.getElementById(`pill-${id}`);
-  const u = UMAP[urg];
-  pill.textContent = u.pillText;
-
-  const eta = document.getElementById(`eta-${id}`);
-  eta.innerHTML = u.etaMsg;
-  eta.className = `eta-box show ${urg}`;
-
-  const uerr = document.getElementById(`uerr-${id}`);
-  if (uerr) uerr.classList.remove('show');
+function setReqType(id, type, btn) {
+  document.getElementById(`rtg-${id}`).querySelectorAll('.req-btn').forEach(b=>delete b.dataset.sel);
+  btn.dataset.sel='1';
+  document.getElementById(`rerr-${id}`).classList.remove('show');
+  const fields=REQ_TYPES[type].fields;
+  ['where','steps','goal','ref'].forEach(f=>{
+    const el=document.getElementById(`mq-${f}-${id}`);
+    if (el) el.style.display=fields.includes(f)?'block':'none';
+  });
 }
 
-function updateFileDisplay(id) {
-  const input = document.getElementById(`file-${id}`);
-  const display = document.getElementById(`file-display-${id}`);
-  if (!input || !display) return;
-
-  if (input.files && input.files.length > 0) {
-    if (input.files.length === 1) {
-      display.textContent = input.files[0].name;
-    } else {
-      display.textContent = `${input.files.length} files selected`;
-    }
-    display.classList.add('selected');
-  } else {
-    display.textContent = 'No files selected';
-    display.classList.remove('selected');
-  }
+function setAsset(id, type, val, btn) {
+  const row=btn.closest('.asset-block');
+  row.querySelectorAll('.yn-btn').forEach(b=>{b.classList.remove('yes-sel','no-sel','needs-sel')});
+  btn.classList.add(val==='yes'?'yes-sel':val==='needs'?'needs-sel':'no-sel');
+  const upload=document.getElementById(`${type}-upload-${id}`);
+  if (upload) upload.classList.toggle('show', val==='yes');
 }
 
-function clearErr(fieldId, inputId) {
-  document.getElementById(fieldId)?.querySelector('.field-error')?.classList.remove('show');
-  document.getElementById(inputId)?.classList.remove('err');
+function updateUploadDisplay(inputId, nameId) {
+  const inp=document.getElementById(inputId), disp=document.getElementById(nameId);
+  if (!inp||!disp) return;
+  if (inp.files&&inp.files.length>0) {
+    disp.textContent=inp.files.length===1?inp.files[0].name:`${inp.files.length} files`;
+    disp.classList.add('has-file');
+  } else { disp.textContent='No files'; disp.classList.remove('has-file'); }
 }
-function clearMicroErr(mqId, inputId) {
-  document.getElementById(mqId)?.querySelector('.micro-err')?.classList.remove('show');
-  document.getElementById(inputId)?.classList.remove('err');
+
+function setPri(id, pri, btn) {
+  const card=document.getElementById(`tc-${id}`);
+  card.dataset.pri=pri;
+  card.querySelectorAll('.pri-btn').forEach(b=>delete b.dataset.sel);
+  btn.dataset.sel=pri;
+  const p=PRI_MAP[pri];
+  document.getElementById(`pill-${id}`).textContent=p.pillText;
+  const eta=document.getElementById(`peta-${id}`);
+  eta.innerHTML=p.eta; eta.className=`pri-eta show ${pri}`;
+  document.getElementById(`perr-${id}`)?.classList.remove('show');
 }
-function showErr(fieldId, inputId, errId) {
-  document.getElementById(errId)?.classList.add('show');
-  document.getElementById(inputId)?.classList.add('err');
-  document.getElementById(inputId)?.focus();
+
+function clearErr(fid,iid) {
+  document.getElementById(fid)?.querySelector('.field-error')?.classList.remove('show');
+  document.getElementById(iid)?.classList.remove('err');
 }
-function showMicroErr(mqId, inputId, errId) {
-  document.getElementById(errId)?.classList.add('show');
-  document.getElementById(inputId)?.classList.add('err');
-  document.getElementById(inputId)?.focus();
+function clearMicroErr(mqid,iid) {
+  document.getElementById(mqid)?.querySelector('.micro-err')?.classList.remove('show');
+  document.getElementById(iid)?.classList.remove('err');
 }
 
 function collectTasks() {
-  return Array.from(document.querySelectorAll('.task-card')).map((card, i) => {
-    const fileInput = card.querySelector('.q-files');
-    const fileCount = fileInput && fileInput.files ? fileInput.files.length : 0;
-    const fileNames = fileInput && fileInput.files ? Array.from(fileInput.files).map(f => f.name) : [];
-    
+  return Array.from(document.querySelectorAll('.task-card')).map((card,i)=>{
+    const id=card.id.replace('tc-','');
+    const reqBtnSel=card.querySelector('.req-btn[data-sel]');
+    const reqType=reqBtnSel?reqBtnSel.dataset.type:'';
+    const copyBtn=card.querySelector('.asset-block .yn-btn.yes-sel,.asset-block .yn-btn.needs-sel,.asset-block .yn-btn.no-sel');
+    function getAssetState(type) {
+      const block=card.querySelectorAll('.asset-block')[type==='copy'?0:1];
+      if (!block) return 'not specified';
+      const s=block.querySelector('.yes-sel'); if (s) return s.textContent.trim();
+      const n=block.querySelector('.needs-sel'); if (n) return n.textContent.trim();
+      const o=block.querySelector('.no-sel'); if (o) return 'N/A';
+      return 'not specified';
+    }
+    const copyFile=document.getElementById(`copy-file-${id}`);
+    const imgFile=document.getElementById(`img-file-${id}`);
     return {
-      num:       i + 1,
-      what:      card.querySelector('.q-what')?.value?.trim()  || '',
-      where:     card.querySelector('.q-where')?.value?.trim() || '',
-      more:      card.querySelector('.q-more')?.value?.trim()  || '',
-      urg:       card.dataset.urg || '',
-      id:        card.id.replace('tc-', ''),
-      fileCount: fileCount,
-      fileNames: fileNames,
+      num:i+1, id,
+      reqType: reqType ? REQ_TYPES[reqType]?.label : '',
+      what: card.querySelector('.q-what')?.value?.trim()||'',
+      where: document.getElementById(`q-where-${id}`)?.value?.trim()||'',
+      steps: document.getElementById(`q-steps-${id}`)?.value?.trim()||'',
+      goal: document.getElementById(`q-goal-${id}`)?.value?.trim()||'',
+      ref: document.getElementById(`q-ref-${id}`)?.value?.trim()||'',
+      more: card.querySelector('.q-more')?.value?.trim()||'',
+      brand: card.querySelector('.q-brand')?.value?.trim()||'',
+      copyStatus: getAssetState('copy'),
+      imgStatus: getAssetState('img'),
+      copyFiles: copyFile&&copyFile.files?Array.from(copyFile.files).map(f=>f.name):[],
+      imgFiles: imgFile&&imgFile.files?Array.from(imgFile.files).map(f=>f.name):[],
+      pri: card.dataset.pri||'',
     };
   });
 }
 
 function buildAgencyEmail(client, tasks) {
-  const now = new Date().toLocaleString('en-ZA', { dateStyle: 'full', timeStyle: 'short' });
-  const hasCritical = tasks.some(t => t.urg === 'urgent');
-  const assignedEmail = getAssignedEmail(client.company);
-  const assignedName = assignedEmail.split('@')[0].charAt(0).toUpperCase() + assignedEmail.split('@')[0].slice(1);
-
-  let s = '';
-  s += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-  s += `  NEW BRIEF — Algorithm\n`;
-  s += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
-  s += `  Client     ${client.name}\n`;
-  s += `  Company    ${client.company}\n`;
-  s += `  Email      ${client.email}\n`;
-  if (client.site) s += `  Website    ${client.site}\n`;
-  s += `  Received   ${now}\n`;
-  s += `  Assigned   ${assignedName}\n`;
-  s += `  Tasks      ${tasks.length}`;
-  if (hasCritical) s += `  ⚠ CONTAINS URGENT ITEM`;
-  s += `\n\n`;
-
-  tasks.forEach(t => {
-    const u = UMAP[t.urg] || UMAP.normal;
-    s += `─────────────────────────────────────────\n`;
-    s += `  TASK ${t.num}  ·  ${u.tier}\n`;
-    s += `─────────────────────────────────────────\n`;
-    s += `  What:      ${t.what}\n`;
-    if (t.where) s += `  Where:     ${t.where}\n`;
-    s += `  Priority:  ${u.tier}\n`;
-    s += `  ETA:       ${u.eta}\n`;
-    if (t.fileCount > 0) {
-      s += `  Files:     ${t.fileCount} attached\n`;
-      t.fileNames.forEach(name => s += `             • ${name}\n`);
-    }
-    if (t.more) s += `\n  Notes:\n  ${t.more.replace(/\n/g, '\n  ')}\n`;
-    s += '\n';
+  const now=new Date().toLocaleString('en-ZA',{dateStyle:'full',timeStyle:'short'});
+  const hasCritical=tasks.some(t=>t.pri==='p1');
+  const assigned=getAssignedEmail(client.company);
+  const assignedName=assigned.split('@')[0].charAt(0).toUpperCase()+assigned.split('@')[0].slice(1);
+  let s=`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n  NEW BRIEF — Algorithm\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+  s+=`  Client     ${client.name}\n  Company    ${client.company}\n  Email      ${client.email}\n`;
+  if (client.site) s+=`  Website    ${client.site}\n`;
+  s+=`  Received   ${now}\n  Assigned   ${assignedName}\n  Tasks      ${tasks.length}`;
+  if (hasCritical) s+=`  ⚠ CONTAINS P1 CRITICAL ITEM`;
+  s+=`\n\n`;
+  tasks.forEach(t=>{
+    const p=PRI_MAP[t.pri]||PRI_MAP.p3;
+    s+=`─────────────────────────────────────\n  TASK ${t.num}  ·  ${p.tag}\n─────────────────────────────────────\n`;
+    if (t.reqType) s+=`  Type:      ${t.reqType}\n`;
+    s+=`  What:      ${t.what}\n`;
+    if (t.where) s+=`  Where:     ${t.where}\n`;
+    if (t.steps) s+=`  Steps:     ${t.steps}\n`;
+    if (t.goal) s+=`  Goal:      ${t.goal}\n`;
+    if (t.ref) s+=`  Reference: ${t.ref}\n`;
+    s+=`  Priority:  ${p.tag}\n  Lead time: ${p.lead.replace('Lead time: ','')}\n`;
+    s+=`  Copy:      ${t.copyStatus}\n  Images:    ${t.imgStatus}\n`;
+    if (t.copyFiles.length) s+=`  Copy files: ${t.copyFiles.join(', ')}\n`;
+    if (t.imgFiles.length) s+=`  Image files: ${t.imgFiles.join(', ')}\n`;
+    if (t.brand) s+=`  Brand:     ${t.brand}\n`;
+    if (t.more) s+=`\n  Notes:\n  ${t.more.replace(/\n/g,'\n  ')}\n`;
+    s+='\n';
   });
-
-  s += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`;
-  s += `  Hit reply to respond directly to ${client.name}.\n`;
+  s+=`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n  Reply directly to respond to ${client.name}.\n`;
   return s;
 }
 
 function buildClientEmail(client, tasks) {
-  const firstName = client.name.split(' ')[0];
-  const ord = { urgent: 0, normal: 1, planned: 2 };
-  const sorted = [...tasks].sort((a, b) => (ord[a.urg] ?? 1) - (ord[b.urg] ?? 1));
-
-  let s = `Hi ${firstName},\n\n`;
-
-  if (tasks.some(t => t.urg === 'urgent')) {
-    s += `Your urgent request has been flagged and our team has been notified. `;
-  }
-  s += `We've received your request${tasks.length > 1 ? 's' : ''} and they're in our queue.\n\n`;
-
-  s += `Here's what you submitted and when to expect each item:\n\n`;
-  sorted.forEach(t => {
-    const u = UMAP[t.urg] || UMAP.normal;
-    s += `▸  ${t.what}\n`;
-    s += `   Turnaround: ${u.eta}\n\n`;
+  const fn=client.name.split(' ')[0];
+  const ord={p1:0,p2:1,p3:2};
+  const sorted=[...tasks].sort((a,b)=>(ord[a.pri]??1)-(ord[b.pri]??1));
+  let s=`Hi ${fn},\n\n`;
+  if (tasks.some(t=>t.pri==='p1')) s+=`Your critical request has been flagged and our team has been notified immediately. `;
+  s+=`We've received your request${tasks.length>1?'s':''}.\n\nHere's a summary and what to expect:\n\n`;
+  sorted.forEach(t=>{
+    const p=PRI_MAP[t.pri]||PRI_MAP.p3;
+    s+=`▸  ${t.reqType?`[${t.reqType}] `:''}${t.what}\n   ${p.lead}\n\n`;
   });
-
-  s += `──────────────────────────────────────\n`;
-  s += `What happens next:\n\n`;
-  if (tasks.some(t => t.urg === 'urgent'))
-    s += `• Urgent — we'll be in touch within 2 business hours to confirm.\n`;
-  if (tasks.some(t => t.urg === 'normal'))
-    s += `• This week — picked up in our active sprint within 2–5 business days.\n`;
-  if (tasks.some(t => t.urg === 'planned'))
-    s += `• No rush — we'll confirm a schedule within a few days.\n`;
-
-  s += `\nIf urgency changes on anything, just reply to this email.\n\n`;
-  s += `Talk soon,\nAshlin\nAlgorithm\n`;
+  s+=`──────────────────────────────────\nWhat happens next:\n\n`;
+  if (tasks.some(t=>t.pri==='p1')) s+=`• P1 Critical — we'll be in touch within 2 business hours.\n`;
+  if (tasks.some(t=>t.pri==='p2')) s+=`• P2 High — picked up within 2–5 business days.\n`;
+  if (tasks.some(t=>t.pri==='p3')) s+=`• P3 Planned — scheduled in our next available sprint.\n`;
+  s+=`\nIf urgency changes, just reply to this email.\n\nTalk soon,\nAshlin\nAlgorithm\n`;
   return s;
 }
 
 async function handleSubmit() {
-  let hasError = false;
-
-  let client = { ...preClient };
-
+  let hasError=false;
+  let client={...preClient};
   if (!prefilled) {
-    const name    = document.getElementById('cName').value.trim();
-    const company = document.getElementById('cCompany').value.trim();
-    const email   = document.getElementById('cEmail').value.trim();
-    const site    = document.getElementById('cSite').value.trim();
-
-    if (!name) {
-      showErr('f-name', 'cName', 'err-name');
-      hasError = true;
-    }
-    if (!company) {
-      showErr('f-company', 'cCompany', 'err-company');
-      if (!hasError) hasError = true;
-    }
-    if (!email || !email.includes('@')) {
-      showErr('f-email', 'cEmail', 'err-email');
-      if (!hasError) hasError = true;
-    }
+    const name=document.getElementById('cName').value.trim();
+    const company=document.getElementById('cCompany').value.trim();
+    const email=document.getElementById('cEmail').value.trim();
+    const site=document.getElementById('cSite').value.trim();
+    if (!name){document.getElementById('err-name').classList.add('show');document.getElementById('cName').classList.add('err');hasError=true;}
+    if (!company){document.getElementById('err-company').classList.add('show');document.getElementById('cCompany').classList.add('err');if(!hasError)hasError=true;}
+    if (!email||!email.includes('@')){document.getElementById('err-email').classList.add('show');document.getElementById('cEmail').classList.add('err');if(!hasError)hasError=true;}
     if (hasError) return;
-    client = { name, company, email, site };
+    client={name,company,email,site};
   }
-
-  const tasks = collectTasks();
-  if (!tasks.length) {
-    alert('Please add at least one task.');
-    return;
-  }
-
+  const tasks=collectTasks();
+  if (!tasks.length){alert('Please add at least one task.');return;}
   for (const t of tasks) {
-    if (!t.what) {
-      showMicroErr(`mq-what-${t.id}`, `q-what-${t.id}`, `merr-what-${t.id}`);
+    if (!t.reqType){
+      document.getElementById(`rerr-${t.id}`)?.classList.add('show');
+      document.getElementById(`tc-${t.id}`)?.scrollIntoView({behavior:'smooth',block:'center'});
       return;
     }
-    if (!t.urg) {
-      const el = document.getElementById(`uerr-${t.id}`);
-      if (el) el.classList.add('show');
-      document.getElementById(`tc-${t.id}`)
-        ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (!t.what){
+      document.getElementById(`merr-what-${t.id}`)?.classList.add('show');
+      document.getElementById(`q-what-${t.id}`)?.classList.add('err');
+      document.getElementById(`q-what-${t.id}`)?.focus();
+      return;
+    }
+    if (!t.pri){
+      document.getElementById(`perr-${t.id}`)?.classList.add('show');
+      document.getElementById(`tc-${t.id}`)?.scrollIntoView({behavior:'smooth',block:'center'});
       return;
     }
   }
-
-  const hasUrgent = tasks.some(t => t.urg === 'urgent');
-  const subject = hasUrgent
-    ? `🚨 URGENT — ${client.company} (${tasks.length} task${tasks.length > 1 ? 's' : ''})`
-    : `New Brief — ${client.company} (${tasks.length} task${tasks.length > 1 ? 's' : ''})`;
-
-  // Determine which team member should receive this
-  const assignedEmail = getAssignedEmail(client.company);
-  const assignedName = assignedEmail.split('@')[0].charAt(0).toUpperCase() + assignedEmail.split('@')[0].slice(1);
-
-  sessionStorage.setItem('__brief', JSON.stringify({
-    name: client.name,
-    tasks: tasks.map(t => ({ what: t.what, urg: t.urg })),
-  }));
-
-  const payload = {
-    _subject:             subject,
-    _replyto:             client.email,
-    _cc:                  assignedEmail, // CC the assigned team member
-    _bcc:                 'ashlin@algorithm.agency,sarah@algorithm.agency', // Always BCC Ashlin and Sarah
-    client_name:          client.name,
-    client_company:       client.company,
-    client_email:         client.email,
-    client_website:       client.site || '—',
-    assigned_to:          assignedName, // Track who this is assigned to
-    full_brief:           buildAgencyEmail(client, tasks),
-    client_confirmation:  buildClientEmail(client, tasks),
-    _gotcha:              '',
+  const hasCritical=tasks.some(t=>t.pri==='p1');
+  const subject=hasCritical
+    ?`🚨 P1 CRITICAL — ${client.company} (${tasks.length} task${tasks.length>1?'s':''})`
+    :`New Brief — ${client.company} (${tasks.length} task${tasks.length>1?'s':''})`;
+  const assigned=getAssignedEmail(client.company);
+  const assignedName=assigned.split('@')[0].charAt(0).toUpperCase()+assigned.split('@')[0].slice(1);
+  const payload={
+    _subject:subject,_replyto:client.email,
+    _cc:assigned,_bcc:'ashlin@algorithm.agency,sarah@algorithm.agency',
+    client_name:client.name,client_company:client.company,client_email:client.email,client_website:client.site||'—',
+    assigned_to:assignedName,full_brief:buildAgencyEmail(client,tasks),client_confirmation:buildClientEmail(client,tasks),_gotcha:'',
   };
-
   document.getElementById('overlay').classList.add('on');
-  document.getElementById('submitBtn').disabled = true;
-
+  document.getElementById('submitBtn').disabled=true;
   try {
-    const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-      method: 'POST',
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-    if (res.ok) {
-      window.location.href = 'thankyou.html';
-    } else {
-      const d = await res.json();
-      throw new Error(d?.errors?.[0]?.message || 'Submission failed');
-    }
-  } catch (err) {
+    const res=await fetch(`https://formspree.io/f/${FORMSPREE_ID}`,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify(payload)});
+    if (res.ok){window.location.href='thankyou.html';}
+    else{const d=await res.json();throw new Error(d?.errors?.[0]?.message||'Submission failed');}
+  } catch(err) {
     document.getElementById('overlay').classList.remove('on');
-    document.getElementById('submitBtn').disabled = false;
-    alert(`Something went wrong:\n${err.message}\n\nCheck that FORMSPREE_ID is set correctly.`);
+    document.getElementById('submitBtn').disabled=false;
+    alert(`Something went wrong:\n${err.message}`);
+  }
+}
+
+function openHelpEmail() {
+  const modal=document.getElementById('helpModal');
+  modal.classList.add('show');
+  if (prefilled&&preClient.name){
+    document.getElementById('helpName').value=preClient.name;
+    document.getElementById('helpEmail').value=preClient.email||'';
+    const ae=getAssignedEmail(preClient.company);
+    const an=ae.split('@')[0].charAt(0).toUpperCase()+ae.split('@')[0].slice(1);
+    document.getElementById('helpAgentName').textContent=`Chat with ${an}`;
+    document.getElementById('helpAgentRole').textContent='Your account manager';
+    document.getElementById('helpAssignedName').textContent=`${an} will`;
+  }
+}
+function closeHelpChat() {
+  document.getElementById('helpModal').classList.remove('show');
+  setTimeout(()=>{
+    document.getElementById('helpForm').style.display='block';
+    document.getElementById('helpSuccess').classList.remove('show');
+    ['helpName','helpEmail','helpMessage'].forEach(id=>document.getElementById(id).value='');
+  },300);
+}
+async function sendHelpMessage() {
+  const name=document.getElementById('helpName').value.trim();
+  const email=document.getElementById('helpEmail').value.trim();
+  const message=document.getElementById('helpMessage').value.trim();
+  if (!name||!email||!message){alert('Please fill in all fields');return;}
+  if (!email.includes('@')){alert('Please enter a valid email');return;}
+  const btn=document.getElementById('btnSendHelp');
+  btn.disabled=true; btn.textContent='Sending…';
+  const re=prefilled&&preClient.company?getAssignedEmail(preClient.company):'support@algorithm.agency';
+  const rn=re.split('@')[0].charAt(0).toUpperCase()+re.split('@')[0].slice(1);
+  try {
+    const res=await fetch(`https://formspree.io/f/${FORMSPREE_ID}`,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({_subject:`Help Request from ${name}`,_replyto:email,_cc:re,_bcc:'ashlin@algorithm.agency,sarah@algorithm.agency',name,email,message,type:'help_request',assigned_to:rn})});
+    if (res.ok){document.getElementById('helpForm').style.display='none';document.getElementById('helpSuccess').classList.add('show');document.getElementById('helpSuccessMsg').textContent=`Your message has been sent to ${rn}. We'll get back to you shortly.`;}
+    else throw new Error('Failed');
+  } catch {
+    alert('Failed to send. Please try again or email us directly.');
+    btn.disabled=false; btn.textContent='Send message';
   }
 }
 
 addTask();
 </script>
-
 </body>
 </html>
