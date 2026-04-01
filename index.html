@@ -47,7 +47,6 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
 .field input.err,.field textarea.err{border-color:var(--red);background:var(--red-dim)}
 .field-error{font-size:.72rem;color:var(--red);display:none;align-items:center;gap:4px}
 .field-error.show{display:flex}
-/* Task card */
 .task-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:14px;box-shadow:var(--shadow);animation:slideIn .3s ease}
 @keyframes slideIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 .task-stripe{height:3px;background:var(--border);transition:background .3s}
@@ -68,7 +67,6 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
 .task-section:last-child{margin-bottom:0}
 .section-title{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;display:flex;align-items:center;gap:8px}
 .section-title::after{content:'';flex:1;height:1px;background:var(--border)}
-/* Request type tiles */
 .req-type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:6px}
 .req-btn{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:14px 10px;cursor:pointer;text-align:left;transition:all var(--tr);font-family:'Inter',sans-serif;display:flex;flex-direction:column;gap:4px}
 .req-btn:hover{border-color:var(--border-light);background:var(--bg-card)}
@@ -79,10 +77,8 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
 .req-btn[data-sel] .req-btn-title{color:var(--cyan)}
 .req-err{font-size:.72rem;color:var(--red);margin-top:6px;display:none}
 .req-err.show{display:block}
-/* Conditional fields */
 .cond-fields{display:none;margin-top:16px;padding:16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;animation:fadeIn .25s ease}
 .cond-fields.show{display:block}
-/* Micro questions */
 .micro-q{margin-bottom:14px}
 .micro-q:last-child{margin-bottom:0}
 .micro-q label{font-size:.78rem;font-weight:500;color:var(--text);display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px}
@@ -93,7 +89,6 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
 .micro-q input.err,.micro-q textarea.err{border-color:var(--red);background:var(--red-dim)}
 .micro-err{font-size:.72rem;color:var(--red);margin-top:4px;display:none}
 .micro-err.show{display:block}
-/* Assets grid */
 .assets-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
 .asset-block{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:14px}
 .asset-block-title{font-size:.75rem;font-weight:500;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:6px}
@@ -110,7 +105,6 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
 .upload-btn-label{font-size:.75rem;font-weight:500;color:var(--text-muted);white-space:nowrap}
 .upload-name{font-size:.75rem;color:var(--text-dim);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .upload-name.has-file{color:var(--text)}
-/* Priority */
 .pri-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .pri-btn{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:16px 10px;cursor:pointer;text-align:left;transition:all var(--tr);font-family:'Inter',sans-serif}
 .pri-btn:hover{border-color:var(--border-light);background:var(--bg-card)}
@@ -142,7 +136,6 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
 .pri-note{margin-top:10px;font-size:.72rem;color:var(--text-dim);line-height:1.6;padding:10px 12px;background:var(--bg-elevated);border-radius:6px;border-left:2px solid var(--border)}
 .pri-err{font-size:.72rem;color:var(--red);margin-top:8px;display:none}
 .pri-err.show{display:block}
-/* Add task */
 .btn-add{width:100%;background:transparent;border:1px dashed var(--border);border-radius:var(--radius);padding:16px;font-family:'Inter',sans-serif;font-size:.85rem;color:var(--text-dim);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all var(--tr);margin-bottom:20px}
 .btn-add:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-dim)}
 .submit-bar{background:linear-gradient(135deg,#21252D 0%,#2A2F3A 100%);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:18px;box-shadow:var(--shadow)}
@@ -157,7 +150,6 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
 @keyframes spin{to{transform:rotate(360deg)}}
 .spinner-box{text-align:center}
 .spinner-box p{font-size:.85rem;color:var(--text-muted)}
-/* Help modal */
 .help-modal{position:fixed;inset:0;background:rgba(26,29,35,.95);backdrop-filter:blur(10px);z-index:999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;padding:20px}
 .help-modal.show{opacity:1;pointer-events:all}
 .help-chat{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);width:100%;max-width:480px;animation:slideIn .3s ease}
@@ -299,7 +291,9 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-
 </div>
 
 <script>
-const FORMSPREE_ID = 'YOUR_FORM_ID';
+// ─── FIXED: Correct Formspree ID and default email ───
+const FORMSPREE_ID = 'mlgprlqb';
+const DEFAULT_EMAIL = 'ashlin@algorithm.agency';
 
 const REQ_TYPES = {
   fix:     { label:'Fix something broken',    icon:'🔧', sub:'Bug, error, or broken feature',      fields:['what','where','steps'] },
@@ -320,7 +314,6 @@ const CLIENT_ROUTING = {
   'unispan':'jemima@algorithm.agency','uni-span':'jemima@algorithm.agency','goscor':'jemima@algorithm.agency','servest':'jemima@algorithm.agency','thanda':'jemima@algorithm.agency',
   'winklmayr':'sarah@algorithm.agency','solugrowth':'daniel@algorithm.agency','m7group':'sizakele@algorithm.agency','m7':'sizakele@algorithm.agency',
 };
-const DEFAULT_EMAIL = 'YOUR_FORM_ID';
 
 function getAssignedEmail(company) {
   if (!company) return DEFAULT_EMAIL;
@@ -537,7 +530,6 @@ function collectTasks() {
     const id=card.id.replace('tc-','');
     const reqBtnSel=card.querySelector('.req-btn[data-sel]');
     const reqType=reqBtnSel?reqBtnSel.dataset.type:'';
-    const copyBtn=card.querySelector('.asset-block .yn-btn.yes-sel,.asset-block .yn-btn.needs-sel,.asset-block .yn-btn.no-sel');
     function getAssetState(type) {
       const block=card.querySelectorAll('.asset-block')[type==='copy'?0:1];
       if (!block) return 'not specified';
@@ -659,17 +651,33 @@ async function handleSubmit() {
   const assigned=getAssignedEmail(client.company);
   const assignedName=assigned.split('@')[0].charAt(0).toUpperCase()+assigned.split('@')[0].slice(1);
   const payload={
-    _subject:subject,_replyto:client.email,
-    _cc:assigned,_bcc:'ashlin@algorithm.agency,sarah@algorithm.agency',
-    client_name:client.name,client_company:client.company,client_email:client.email,client_website:client.site||'—',
-    assigned_to:assignedName,full_brief:buildAgencyEmail(client,tasks),client_confirmation:buildClientEmail(client,tasks),_gotcha:'',
+    _subject:subject,
+    _replyto:client.email,
+    _cc:assigned,
+    _bcc:'ashlin@algorithm.agency,sarah@algorithm.agency',
+    client_name:client.name,
+    client_company:client.company,
+    client_email:client.email,
+    client_website:client.site||'—',
+    assigned_to:assignedName,
+    full_brief:buildAgencyEmail(client,tasks),
+    client_confirmation:buildClientEmail(client,tasks),
+    _gotcha:'',
   };
   document.getElementById('overlay').classList.add('on');
   document.getElementById('submitBtn').disabled=true;
   try {
-    const res=await fetch(`https://formspree.io/f/${FORMSPREE_ID}`,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify(payload)});
-    if (res.ok){window.location.href='thankyou.html';}
-    else{const d=await res.json();throw new Error(d?.errors?.[0]?.message||'Submission failed');}
+    const res=await fetch(`https://formspree.io/f/${FORMSPREE_ID}`,{
+      method:'POST',
+      headers:{'Accept':'application/json','Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    if (res.ok){
+      window.location.href='thankyou.html';
+    } else {
+      const d=await res.json();
+      throw new Error(d?.errors?.[0]?.message||'Submission failed');
+    }
   } catch(err) {
     document.getElementById('overlay').classList.remove('on');
     document.getElementById('submitBtn').disabled=false;
@@ -709,9 +717,24 @@ async function sendHelpMessage() {
   const re=prefilled&&preClient.company?getAssignedEmail(preClient.company):'support@algorithm.agency';
   const rn=re.split('@')[0].charAt(0).toUpperCase()+re.split('@')[0].slice(1);
   try {
-    const res=await fetch(`https://formspree.io/f/${FORMSPREE_ID}`,{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:JSON.stringify({_subject:`Help Request from ${name}`,_replyto:email,_cc:re,_bcc:'ashlin@algorithm.agency,sarah@algorithm.agency',name,email,message,type:'help_request',assigned_to:rn})});
-    if (res.ok){document.getElementById('helpForm').style.display='none';document.getElementById('helpSuccess').classList.add('show');document.getElementById('helpSuccessMsg').textContent=`Your message has been sent to ${rn}. We'll get back to you shortly.`;}
-    else throw new Error('Failed');
+    const res=await fetch(`https://formspree.io/f/${FORMSPREE_ID}`,{
+      method:'POST',
+      headers:{'Accept':'application/json','Content-Type':'application/json'},
+      body:JSON.stringify({
+        _subject:`Help Request from ${name}`,
+        _replyto:email,
+        _cc:re,
+        _bcc:'ashlin@algorithm.agency,sarah@algorithm.agency',
+        name,email,message,
+        type:'help_request',
+        assigned_to:rn
+      })
+    });
+    if (res.ok){
+      document.getElementById('helpForm').style.display='none';
+      document.getElementById('helpSuccess').classList.add('show');
+      document.getElementById('helpSuccessMsg').textContent=`Your message has been sent to ${rn}. We'll get back to you shortly.`;
+    } else throw new Error('Failed');
   } catch {
     alert('Failed to send. Please try again or email us directly.');
     btn.disabled=false; btn.textContent='Send message';
